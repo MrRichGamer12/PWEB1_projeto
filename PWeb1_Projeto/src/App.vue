@@ -1,12 +1,26 @@
-<script setup></script>
+<script>
+import { useLogInStore} from './stores/counter.js'
+import Display from '@/components/Display.vue'
+import User from '@/components/Test.vue'
+
+export default {
+  data(){
+    return {
+      store: useLogInStore(),
+    };
+  },
+  components(){
+    Display,
+    User
+  }
+};
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
-  <RouterView />
+  Hey
+  <div v-if="store.isLogged"><User /></div>
+  <div v-else><Display /></div>
+  ABC
 </template>
 
 <style scoped></style>

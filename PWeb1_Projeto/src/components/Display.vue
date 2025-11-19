@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <nav>
-        <button></button>
+        <button @click="store.logIn">logIn</button>
     </nav>
     <div>
         Não está logado
@@ -9,9 +9,14 @@
 </template>
 
 <script>
+    import { useLogInStore} from '../stores/counter'
     export default {
-        
-    }
+        data(){
+            return {
+                store: useLogInStore(),
+            };
+        },
+    };
 </script>
 
 <style scoped>
