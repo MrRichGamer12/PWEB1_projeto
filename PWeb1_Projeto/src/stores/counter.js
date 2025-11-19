@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-labels */
+/* eslint-disable no-unused-vars */
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { mapActions } from 'pinia'
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
+export const useLogInStore = defineStore('Logar', () => {
+  state: () => ({ isLogged: false, isAdmin: false})
+  acions: {
+    logIn() {
+      this.isLogged = true;
+    }
   }
-
-  return { count, doubleCount, increment }
 })

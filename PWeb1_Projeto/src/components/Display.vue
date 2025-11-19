@@ -1,6 +1,10 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
+    <nav>
+        <button></button>
+    </nav>
     <div>
-
+        Não está logado
     </div>
 </template>
 
@@ -13,4 +17,3 @@
 <style scoped>
 
 </style>
-<!--EStes dois coponetes o display e o test erm para ser paginas iniciais para o site se situar paginas de que não está logado e de que testá-->
