@@ -1,18 +1,19 @@
 <script>
 import { useLogInStore} from './stores/counter.js'
 import Display from '@/components/Display.vue'
-import User from '@/components/Test.vue'
+import User from './components/test.vue'
 
 export default {
+  components(){
+    Display,
+    User
+  },
   data(){
     return {
       store: useLogInStore(),
     };
   },
-  components(){
-    Display,
-    User
-  }
+  
 };
 </script>
 
