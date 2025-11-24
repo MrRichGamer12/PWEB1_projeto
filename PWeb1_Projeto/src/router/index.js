@@ -3,6 +3,7 @@ import HomePageView from '@/views/HomePageView.vue'
 import LoginPageView from '@/views/LoginPageView.vue'
 import RegisterPageView from '@/views/RegisterPageView.vue'
 import ProfilePageView from '@/views/ProfilePageView.vue'
+import streacPageView from '@/views/streacPageView.vue'
 import { useUserStore } from '@/stores/userStore'
 
 const router = createRouter({
@@ -15,8 +16,9 @@ const router = createRouter({
       next('/login');
     }else{
       next();
-    }},
+    } },
   },
+  { path: '/streac', component: streacPageView},
   {path: '/aboutus', component: () => import('../views/aboutUs.vue')}
 
   ],
