@@ -11,12 +11,14 @@ const router = createRouter({
   { path: '/login', component: LoginPageView },
   { path: '/register', component: RegisterPageView },
   { path: '/profile/:userid', component: ProfilePageView, beforeEnter(to, from, next){
-  if (!useUserStore.UserAuhtenticated()) {
-    next('/login');
-  }else{
-    next();
-  }
-},}
+    if (!useUserStore.UserAuhtenticated()) {
+      next('/login');
+    }else{
+      next();
+    }},
+  },
+  {path: '/aboutus', component: () => import('../views/aboutUs.vue')}
+
   ],
 })
 export default router
