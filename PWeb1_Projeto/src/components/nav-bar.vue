@@ -1,7 +1,9 @@
 <template>
-    <div>
-
-    </div>
+    <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/register">RegisterPageView</RouterLink>
+        <RouterLink to="/aboutus">AboutUs</RouterLink>
+    </nav>
 </template>
 
 <script>
