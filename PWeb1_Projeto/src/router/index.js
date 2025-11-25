@@ -4,6 +4,7 @@ import LoginPageView from '@/views/LoginPageView.vue'
 import RegisterPageView from '@/views/RegisterPageView.vue'
 import ProfilePageView from '@/views/ProfilePageView.vue'
 import streacPageView from '@/views/streacPageView.vue'
+import estudoPageView from '@/views/estudoPageView.vue'
 import { useUserStore } from '@/stores/userStore'
 
 const router = createRouter({
@@ -19,6 +20,7 @@ const router = createRouter({
     } },
   },
   { path: '/streac', component: streacPageView},
+  { path: '/estudo', component: estudoPageView},
   {path: '/aboutus', component: () => import('../views/aboutUs.vue')}
 
   ],
