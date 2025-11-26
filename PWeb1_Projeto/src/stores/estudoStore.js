@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore('tarefaId', () => {
+export const useAgendaStore = defineStore('tarefaId', () => {
   const atividadesUtili = [{
     id: Number,
     nome: String,
@@ -11,5 +11,5 @@ export const useCounterStore = defineStore('tarefaId', () => {
     fim: Date,
     historico: []
   }]
-  return { atividadesUtili} 
+  return { atividadesUtili } 
 })
