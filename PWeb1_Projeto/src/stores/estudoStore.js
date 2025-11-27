@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useAgendaStore = defineStore('tarefaId', () => {
+export const useAgendaStore = defineStore('tarefa', () => {
   const atividadesUtili = [{
     id: Number,
     nome: String,
