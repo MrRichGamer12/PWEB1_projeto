@@ -15,7 +15,6 @@
             }
         },
     }
-    console.log(this.store)
 </script>
 
 <style scoped>
