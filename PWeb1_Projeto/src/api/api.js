@@ -15,12 +15,13 @@ async function request(url, options = {}) {
     return text ? JSON.parse(text) : null
 }
 
+// Metodo GET
 export async function get(endpoint) {
     const url = `${BASE_URL}${endpoint}`
     return request(url)
 }
 
-// POST - Criar novos recursos
+// Metodo POST
 export async function post(endpoint, data) {
     const url = `${BASE_URL}${endpoint}`
     return request(url, {
@@ -29,7 +30,7 @@ export async function post(endpoint, data) {
     })
 }
 
-// PUT - Atualizar recurso completo
+// Metodo PUT
 export async function put(endpoint, data) {
     const url = `${BASE_URL}${endpoint}`
     return request(url, {
@@ -38,8 +39,7 @@ export async function put(endpoint, data) {
     })
 }
 
-// DELETE - Remover recurso
-// Nota: 'del' porque 'delete' é palavra reservada em JS
+// Metodo DELETE - está del por já existir o metodo delete no js
 export async function del(endpoint) {
     const url = `${BASE_URL}${endpoint}`
     return request(url, {
