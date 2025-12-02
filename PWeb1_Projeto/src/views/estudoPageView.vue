@@ -1,7 +1,7 @@
 <template>
     <div>
-        <p>Estudador.com</p>
         <button @click="this.addTaref = true">+</button>
+        <br>
         <div v-if="addTaref">
             <button @click="close()">X</button>
             <p>Nome:<input type="text" name="inicio" id=""></p>
@@ -17,9 +17,10 @@
             <p>Descrição: <input type="text" name="" id=""></p>
             <button @click="submit">Submit</button>
         </div>
+        <br>
         <div></div>
         <div>
-            <p></p>
+            <p>Ainda não tens nenhum plano de estudo clique no botão "+" para adicionar um novo plano de estudo</p>
         </div>
     </div>
 </template>
