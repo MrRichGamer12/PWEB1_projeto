@@ -1,55 +1,50 @@
 /* eslint-disable no-unused-labels */
-import { computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useUserStore = defineStore('user', () => {
-  const users = []              // não é ref, como pediste
-  let currentUser = null        // utilizador autenticado
+export const useUserStore = defineStore('user', {
+  state: () => ({
+    users: [],              // lista de utilizadores
+    currentUser: null       // utilizador autenticado
+  }),
 
-  // getter estilo computed
-  const UserAuthenticated = computed(() => currentUser !== null)
+  getters: {
+    UserAuthenticated: (state) => state.currentUser !== null
+  },
 
-  // ações
-  function register(username, password) {
-    const exists = users.find(u => u.username === username)
-    if (exists) return false
+  actions: {
+    register(username, password) {
+      const exists = this.users.find(u => u.username === username)
+      if (exists) return false
 
-    users.push({
-      id: Date.now(),
-      username,
-      password
-    })
+      this.users.push({
+        id: Date.now(),
+        username,
+        password
+      })
 
-    return true
-  }
-
-  function login(username, password) {
-    const found = users.find(
-      u => u.username === username && u.password === password
-    )
-    if (found) {
-      currentUser = found
       return true
+    },
+
+    login(username, password) {
+      const found = this.users.find(
+        u => u.username === username && u.password === password
+      )
+      if (found) {
+        this.currentUser = found
+        return true
+      }
+      return false
+    },
+
+    logout() {
+      this.currentUser = null
+    },
+
+    tester() {
+      return {
+        utilizer: 'neor',
+        pass: 'H3y_:)ç'
+      }
     }
-    return false
-  }
-
-  function logout() {
-    currentUser = null
-  }
-
-  function tester() {
-    utilizer: 'neor';
-    pass: 'H3y_:)ç'
-  }
-
-  return {
-    users,
-    currentUser,
-    UserAuthenticated,
-    register,
-    login,
-    logout,
-    tester
   }
 })
