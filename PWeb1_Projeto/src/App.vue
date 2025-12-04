@@ -9,4 +9,8 @@ import navBar from './components/nav-bar.vue'
   <RouterView/>
 </template>
 
-<style scoped></style>
+<style>
+body{
+  background-color: aliceblue;
+}
+</style>
