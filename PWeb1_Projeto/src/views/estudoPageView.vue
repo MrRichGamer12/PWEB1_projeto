@@ -18,7 +18,7 @@
             <button @click="submit">Submit</button>
         </div>
         <br>
-        <div></div>
+        <div><useAgendaStore></useAgendaStore></div>
         <div>
             <p>Ainda não tens nenhum plano de estudo clique no botão "+" para adicionar um novo plano de estudo</p>
         </div>
@@ -28,10 +28,14 @@
 <script>
     import  {useAgendaStore}  from '@/stores/estudoStore'
     export default {
+        name: 'listaActivs',
+        components: {
+            useAgendaStore,
+        },
+        props: {},
         data() {
             return {
                 addTaref: false,
-                store: useAgendaStore(),
             }
         },
         methods: {

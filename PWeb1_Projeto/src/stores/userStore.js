@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-labels */
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
