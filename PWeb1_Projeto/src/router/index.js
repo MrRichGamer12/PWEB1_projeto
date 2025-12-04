@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePageView from '@/views/HomePageView.vue'
-import LoginPageView from '@/views/LoginPageView.vue'
+import LoginPageView from '@/views/logInSigInPageView.vue'
 import RegisterPageView from '@/views/RegisterPageView.vue'
 import ProfilePageView from '@/views/ProfilePageView.vue'
 import streacPageView from '@/views/streacPageView.vue'
