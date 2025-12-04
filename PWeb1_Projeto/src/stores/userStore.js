@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-labels */
 import { computed } from 'vue'
 import { defineStore } from 'pinia'
 
@@ -37,12 +38,18 @@ export const useUserStore = defineStore('user', () => {
     currentUser = null
   }
 
+  function tester() {
+    utilizer: 'neor';
+    pass: 'H3y_:)ç'
+  }
+
   return {
     users,
     currentUser,
     UserAuthenticated,
     register,
     login,
-    logout
+    logout,
+    tester
   }
 })
