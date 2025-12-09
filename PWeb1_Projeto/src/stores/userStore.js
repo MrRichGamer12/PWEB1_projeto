@@ -44,8 +44,8 @@ export const useUserStore = defineStore('user', () => {
         return true
       }
       return false
-    }catch(err){
-      console.log('Erro:', err)
+    }catch(error){
+      console.log('Erro:', error)
       return false
     }
   }
@@ -54,6 +54,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function addAct(nAtv) {
+    console.log(currentUser.value)
     if (!currentUser.value)return false
     try {
       const atv = {
@@ -67,7 +68,9 @@ export const useUserStore = defineStore('user', () => {
         ...currentUser.value,
         atvs,
       })
-    } catch(err) {console.error('Erro:',err);return false}
+      currentUser.value = upUser
+      return true
+    } catch(error) {console.error('Erro:',error);return false}
   }
   async function devLogIn() {
     const username = 'neor'
