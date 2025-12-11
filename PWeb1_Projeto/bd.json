@@ -1,19 +1,33 @@
 {
-    "users": [{
-        "id": 0,
-        "username": "neor",
-        "password": "H3y_:)ç",
-        "cargo": 1,
-        "atividades":[{
-            "id": 1,
-            "nome": "trabalho WebP1",
-            "disciplina": "WebP1",
-            "descrição": "Sabes muito bem o que faser",
-            "meta": 21,
-            "inicio": "2-12-2025",
-            "fim": "10-1-2025",
-            "historico": []
-        }],
-        "perfil":[]
-    }]
+  "users": [
+    {
+      "id": "0",
+      "username": "neor",
+      "password": "H3y_:)ç",
+      "cargo": 1,
+      "atividades": [
+        {
+          "id": 1,
+          "nome": "trabalho WebP1",
+          "disciplina": "WebP1",
+          "descrição": "Sabes muito bem o que faser",
+          "meta": 21,
+          "inicio": "2-12-2025",
+          "fim": "10-1-2025",
+          "historico": []
+        },
+        {
+          "id": "f9d86483-e32f-4f43-b117-780095fb434a",
+          "nome": "ddd",
+          "disciplina": "Documento Do Doente",
+          "descricao": "São os 33 ",
+          "meta": 33,
+          "inicio": "2025-03-03",
+          "fim": "2026-05-04",
+          "historico": []
+        }
+      ],
+      "perfil": []
+    }
+  ]
 }
