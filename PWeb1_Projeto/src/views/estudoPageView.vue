@@ -27,7 +27,7 @@
                 <hr/>
             </div>
         </div>
-        <div v-else>
+        <div>
             <p>Ainda não tens nenhum plano de estudo clique no botão "+" para adicionar um novo plano de estudo</p>
         </div>
     </div>
@@ -35,13 +35,13 @@
 
 <script>
     import  {useUserStore}  from '@/stores/userStore'
+    import { mapState, mapActions } from 'pinia'
 
     export default {
         data() {
             return {
                 addTaref: false,
-                userStore: useUserStore(),
-                    novaTarefa: {
+                novaTarefa: {
                     nome: '',
                     disciplina: '',
                     descricao: '',
@@ -50,12 +50,25 @@
                     fim: '',
                 },
             }
+        },//perguntar ao professor o que são esses '...'
+        computed: {
+            ...mapState(useUserStore, ['currentUser', 'isAuthenticated'])
         },
         methods: {
+            ...mapActions(useUserStore, ['addAct']),
+            limpForm: function() {
+                this.novaTarefa = {
+                nome: '',
+                disciplina: '',
+                descricao: '',
+                meta: 0,
+                inicio: '',
+                fim: '',
+                }
+            },
             close: function() {
                 this.addTaref = false
                 this.limparForm()
-                console.log(this.userStore.currentUser?.atvs?.length)
             },
             async submit() {
                 // Chama a função da store para adicionar atividade
@@ -67,18 +80,7 @@
                     this.limparForm()
                 } else alert('Tem algo errado')
             },
-            limpForm() {
-                this.novaTarefa = {
-                nome: '',
-                disciplina: '',
-                descricao: '',
-                meta: 0,
-                inicio: '',
-                fim: '',
-                }
-            },
         }
-        
     }
 </script>
 

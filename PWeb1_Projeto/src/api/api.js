@@ -6,6 +6,7 @@ async function request(url, options = {}) {
         headers: {
             'Content-Type': 'application/json',
         }
+        , ...options
     })
 
     if (!response.ok) {
