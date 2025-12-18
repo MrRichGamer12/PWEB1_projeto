@@ -12,16 +12,22 @@ const router = createRouter({
   routes: [{ path: '/', component: HomePageView },
   { path: '/login', component: LoginPageView },
   { path: '/register', component: RegisterPageView },
-  { path: '/profile/:userid', component: ProfilePageView, beforeEnter(to, from, next){
-    if (!useUserStore.UserAuhtenticated()) {
-      next('/login');
-    }else{
-      next();
-    } },
+  {
+    path: '/profile', component: ProfilePageView, beforeEnter: (to, from, next) => {
+      const userStore = useUserStore()
+
+      if (!userStore.isAuthenticated) {
+        console.log(userStore.$state.currentUser)
+        next('/login')
+      } else {
+        console.log(userStore.$state.currentUser)
+        next()
+      }
+    },
   },
-  { path: '/streac', component: streacPageView},
-  { path: '/estudo', component: estudoPageView},
-  {path: '/aboutus', component: () => import('../views/aboutUs.vue')}
+  { path: '/streac', component: streacPageView },
+  { path: '/estudo', component: estudoPageView },
+  { path: '/aboutus', component: () => import('../views/aboutUs.vue') }
 
   ],
 })
