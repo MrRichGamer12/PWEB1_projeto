@@ -2,6 +2,7 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router';
 import navBar from './components/nav-bar.vue'
+import LogSigIn from './components/LogSigIn.vue';
 import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 
@@ -15,6 +16,7 @@ onMounted(async () => {
 <template>
   <navBar/>
   <RouterView/>
+  <div><LogSigIn/></div>
 </template>
 
 <style>
