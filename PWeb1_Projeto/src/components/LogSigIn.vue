@@ -1,36 +1,36 @@
 <template>
     <div v-if="this.Select">
-      <p>UserName:<input type="text" v-model="LogIn.nome"></p>
+      <p>UserName:<input type="text" v-model="TxtLogIn.nome"></p>
       <br>
-      <p>PassWord:<input type="text" v-model="LogIn.pass"></p>
+      <p>PassWord:<input type="text" v-model="TxtLogIn.pass"></p>
       <br>
-      <button>LogIn</button>
+      <button @click="iniciarlogin()">LogIn</button>
       <p>Não tem conta? click aqui =><button @click="CHSigIn">SigIn</button></p>
     </div>
     <div v-else>
-      <p>UserName:<input type="text" v-model="SigIn.nome"></p>
+      <p>UserName:<input type="text" v-model="TxtSigIn.nome"></p>
       <br>
-      <p>PassWord:<input type="text" v-model="SigIn.pass"></p>
+      <p>PassWord:<input type="text" v-model="TxtSigIn.pass"></p>
       <br>
-      <p>Confirmar PassWord:<input type="text"></p>
+      <p>Confirmar PassWord:<input type="text" v-model="TxtSigIn.paSS"></p>
       <br>
-      <button>SigIn</button>
+      <button @click="iniciarsigin()">SigIn</button>
       <p>Tem conta? click aqui =><button @click="CHLogin">LogIn</button></p>
     </div>
 </template>
 
 <script>
-    // eslint-disable-next-line no-unused-vars
     import { useUserStore } from '@/stores/userStore'
+    import { mapActions } from 'pinia'
     export default {
       data() {
         return {
           Select: true,
-          LogIn: {
+          TxtLogIn: {
             nome: "",
             pass: ""
           },
-          SigIn: {
+          TxtSigIn: {
             nome: "",
             pass: "",
             paSS: ""
@@ -38,26 +38,27 @@
         }
       },
       methods: {
+        ...mapActions(useUserStore,['logIn', 'register']),
         CHLogin() {
           this.Select = true
-          this.LogIn.nome = ""
-          this.LogIn.pass = ""
+          this.TxtLogIn.nome = ""
+          this.TxtLogIn.pass = ""
         },
         CHSigIn() {
           this.Select = false
-          this.SigIn.nome = ""
-          this.SigIn.pass = ""
-          this.SigIn.paSS = ""
+          this.TxtSigIn.nome = ""
+          this.TxtSigIn.pass = ""
+          this.TxtSigIn.paSS = ""
         },
         async iniciarlogin() {
-          const lig = await this.logIn(this.LogIn.nome, this.LogIn.pass)
+          const lig = await this.logIn(this.TxtLogIn.nome, this.TxtLogIn.pass)
           if (lig) {
             alert("por enquantoassim")
           } else alert('Tem algo errado')
         },
         async iniciarsigin() {
           if(this.SigIn.pass == this.SigIn.paSS){
-            const siginar = await this.register(this.SigIn.nome, this.SigIn.pass)
+            const siginar = await this.register(this.TxtSigIn.nome, this.TxtSigIn.pass)
             if(siginar){
               alert("Utilisador Criado")
             } else alert("Algo de érrado aconteceu")
