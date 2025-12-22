@@ -7,6 +7,7 @@ import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 
 const userStore = useUserStore()
+const logar= false
 
 onMounted(async () => {
   await userStore.devLogIn()
@@ -16,11 +17,11 @@ onMounted(async () => {
 <template>
   <div>
     <navBar/>
-    <div><p>Não tem nenhuma conta ativa.</p><button>LogIn</button></div>
-    <div><!--Aqui vai ficar o hiperlink para o perfil--></div>
+    <div v-if="userStore.currentUser=null"><p>Não tem nenhuma conta ativa.</p><button>LogIn</button></div>
+    <div v-else><p>:)</p><!--Aqui vai ficar o hiperlink para o perfil--></div>
   </div>
   <RouterView/>
-  <div><LogSigIn/></div>
+  <div v-if="logar"><LogSigIn/></div>
 </template>
 
 <style>

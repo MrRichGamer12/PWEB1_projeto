@@ -23,6 +23,7 @@
       <div v-for="atividade in currentUser.atividades" :key="atividade.id">
         <p>
           <strong>{{ atividade.nome }}</strong> - {{ atividade.disciplina }}
+          <button>Começar</button>
         </p>
         <p>{{ atividade.descricao }}</p>
         <p>Meta:{{ atividade.meta }}h | {{ atividade.inicio }} -> {{ atividade.fim }}</p>
