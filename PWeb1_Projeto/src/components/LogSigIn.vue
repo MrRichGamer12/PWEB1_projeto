@@ -57,7 +57,7 @@
           } else alert('Tem algo errado')
         },
         async iniciarsigin() {
-          if(this.SigIn.pass == this.SigIn.paSS){
+          if(this.TxtSigIn.pass == this.TxtSigIn.paSS){
             const siginar = await this.register(this.TxtSigIn.nome, this.TxtSigIn.pass)
             if(siginar){
               alert("Utilisador Criado")
