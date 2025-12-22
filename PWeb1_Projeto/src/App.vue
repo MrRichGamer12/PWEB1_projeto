@@ -14,7 +14,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <navBar/>
+  <div>
+    <navBar/>
+    <div><p>Não tem nenhuma conta ativa.</p><button>LogIn</button></div>
+    <div><!--Aqui vai ficar o hiperlink para o perfil--></div>
+  </div>
   <RouterView/>
   <div><LogSigIn/></div>
 </template>
