@@ -1,4 +1,6 @@
 <template>
+  <p>{{ mostrar }}</p>
+  <div v-if="mostrar">
     <div v-if="this.Select">
       <p>UserName:<input type="text" v-model="TxtLogIn.nome"></p>
       <br>
@@ -17,12 +19,19 @@
       <button @click="iniciarsigin()">SigIn</button>
       <p>Tem conta? click aqui =><button @click="CHLogin">LogIn</button></p>
     </div>
+  </div>
 </template>
 
 <script>
     import { useUserStore } from '@/stores/userStore'
     import { mapActions } from 'pinia'
     export default {
+      props: {
+        mostrar: {
+          type: Boolean,
+          default: false
+        },
+      },
       data() {
         return {
           Select: true,
@@ -54,6 +63,7 @@
           const lig = await this.logIn(this.TxtLogIn.nome, this.TxtLogIn.pass)
           if (lig) {
             alert("por enquantoassim")
+            this.$emit(false)
           } else alert('Tem algo errado')
         },
         async iniciarsigin() {
@@ -61,6 +71,7 @@
             const siginar = await this.register(this.TxtSigIn.nome, this.TxtSigIn.pass)
             if(siginar){
               alert("Utilisador Criado")
+              this.$emit(false)
             } else alert("Algo de érrado aconteceu")
           }else{
             alert("a password não é a mesma")

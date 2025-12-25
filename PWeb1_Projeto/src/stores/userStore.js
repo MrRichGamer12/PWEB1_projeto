@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { defineStore } from 'pinia'
 import { get, post, put } from '@/api/api'
 
