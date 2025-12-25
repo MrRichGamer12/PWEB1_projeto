@@ -4,7 +4,7 @@
     <div v-if="this.Select">
       <p>UserName:<input type="text" v-model="TxtLogIn.nome"></p>
       <br>
-      <p>PassWord:<input type="text" v-model="TxtLogIn.pass"></p>
+      <p>PassWord:<input type="password" v-model="TxtLogIn.pass"></p>
       <br>
       <button @click="iniciarlogin()">LogIn</button>
       <p>Não tem conta? click aqui =><button @click="CHSigIn">SigIn</button></p>
@@ -12,9 +12,9 @@
     <div v-else>
       <p>UserName:<input type="text" v-model="TxtSigIn.nome"></p>
       <br>
-      <p>PassWord:<input type="text" v-model="TxtSigIn.pass"></p>
+      <p>PassWord:<input type="password" v-model="TxtSigIn.pass"></p>
       <br>
-      <p>Confirmar PassWord:<input type="text" v-model="TxtSigIn.paSS"></p>
+      <p>Confirmar PassWord:<input type="password" v-model="TxtSigIn.paSS"></p>
       <br>
       <button @click="iniciarsigin()">SigIn</button>
       <p>Tem conta? click aqui =><button @click="CHLogin">LogIn</button></p>
@@ -63,7 +63,8 @@
           const lig = await this.logIn(this.TxtLogIn.nome, this.TxtLogIn.pass)
           if (lig) {
             alert("por enquantoassim")
-            this.$emit(false)
+            this.$emit('update:mostrar', false)
+            console.log(this.mostrar)
           } else alert('Tem algo errado')
         },
         async iniciarsigin() {
@@ -71,7 +72,7 @@
             const siginar = await this.register(this.TxtSigIn.nome, this.TxtSigIn.pass)
             if(siginar){
               alert("Utilisador Criado")
-              this.$emit(false)
+              this.$emit('update:mostrar', false)
             } else alert("Algo de érrado aconteceu")
           }else{
             alert("a password não é a mesma")
