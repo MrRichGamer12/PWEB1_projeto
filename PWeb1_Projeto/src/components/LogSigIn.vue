@@ -46,6 +46,7 @@
           }
         }
       },
+      emits: ['update:mostrar'],
       methods: {
         ...mapActions(useUserStore,['logIn', 'register']),
         CHLogin() {

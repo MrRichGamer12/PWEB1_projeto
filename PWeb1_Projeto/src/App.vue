@@ -24,7 +24,7 @@ console.log(userStore.currentUser)
     <div v-else><p>:)</p><!--Aqui vai ficar o hiperlink para o perfil--></div>
   </div>
   <RouterView/>
-  <LogSigIn :mostrar="mostrar"/>
+  <LogSigIn v-model:mostrar="mostrar" />
 </template>
 
 <style>
