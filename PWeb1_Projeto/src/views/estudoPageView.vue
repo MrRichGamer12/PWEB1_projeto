@@ -18,6 +18,8 @@
       <button @click="submit">Submit</button>
     </div>
     <br />
+    <div><estudoHub/></div>
+    <br />
     <div v-if="currentUser?.atividades?.length > 0">
       <h3>Os teus planos de estudo:</h3>
       <div v-for="atividade in currentUser.atividades" :key="atividade.id">
@@ -41,6 +43,7 @@
 
 <script>
 import { useUserStore } from '@/stores/userStore'
+import estudoHub from '@/components/estudoHub.vue';
 import { mapState, mapActions } from 'pinia'
 
 export default {
@@ -56,6 +59,9 @@ export default {
         fim: '',
       },
     }
+  },
+  components: {
+    estudoHub,
   },
   computed: {
     ...mapState(useUserStore, ['currentUser', 'isAuthenticated']),
