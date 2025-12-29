@@ -10,9 +10,9 @@ import { ref } from 'vue'
 const userStore = useUserStore()
 const mostrar= ref(false)
 
-/*onMounted(async () => {
+onMounted(async () => {
   await userStore.devLogIn()
-})*/
+})
 
 console.log(userStore.currentUser)
 </script>

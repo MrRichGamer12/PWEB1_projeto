@@ -41,6 +41,7 @@ export const useUserStore = defineStore('user', {
             },
             atividadeRecente: [],
           },
+          Recap: {}
         })
 
         return { success: true, user: newUser }

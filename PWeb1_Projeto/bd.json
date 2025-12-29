@@ -27,29 +27,8 @@
           "historico": []
         }
       ],
-      "perfil": {}
-    },
-    {
-      "id": "15dc",
-      "username": "HiperMen",
-      "password": "1234Abcd",
-      "cargo": 0,
-      "atividades": [],
-      "perfil": {
-        "avatar": "avatar_default.png",
-        "nivel": 1,
-        "xp": 0,
-        "xpProximoNivel": 100,
-        "streak": {
-          "atual": 0,
-          "ultimaAtividade": null
-        },
-        "estatisticas": {
-          "acoesRealizadas": 0,
-          "xpTotal": 0
-        },
-        "atividadeRecente": []
-      }
+      "perfil": {},
+      "Recap": {}
     }
   ]
 }
