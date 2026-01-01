@@ -1,15 +1,15 @@
 <template>
   <div>
-    <p>Timer</p>
+    <span>0:00:00 - {{ time }}</span>
   </div>
   <div>
-    <div v-if="this.On">
+    <div v-if="this.on">
       <button @click="this.Start()">Start</button>
     </div>
     <div v-else>
       <button @click="this.Stop()">Stop</button>
     </div>
-    <div v-if="this.Time != ''">
+    <div v-if="this.time != 0">
       <button @click="this.End()">End</button>
     </div>
   </div>
@@ -21,20 +21,26 @@
     data() {
       return {
         on: true,
-        time:"",
+        time:0,
         começo:"",
-        final:""
+        final:"",
+        intervalo: null
       }
     },
     methods: {
       Start() {
-        this.On = false
+        this.on = false
         if(this.começo!=""){
           this.começo = new Date().toLocaleTimeString()
         }
+        this.intervalo = setInterval(() => {
+          this.time += 1
+        }, 1000)
+        // O setInterval funciona da seguinte forma, setInterval(função, tempo em ms) para executar a função de x em x tempo
       },
       Stop() {
-        this.On = true
+        this.on = true
+        clearInterval(this.intervalo)//parar o timer de contar
       },
       End() {
         this.Stop()

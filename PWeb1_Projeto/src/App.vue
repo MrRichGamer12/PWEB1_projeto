@@ -1,11 +1,12 @@
 <!-- eslint-disable no-unused-vars -->
+ <!-- o setup é um metodo que serve para indicar não passar as importações que
+  acontecem para este arquivo não passe para os outros util para a base de todo o site -->
 <script setup>
 import { RouterView, RouterLink } from 'vue-router';
 import navBar from './components/nav-bar.vue'
 import LogSigIn from './components/LogSigIn.vue';
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
-import { ref } from 'vue'
 
 const userStore = useUserStore()
 const mostrar= ref(false)
@@ -13,8 +14,6 @@ const mostrar= ref(false)
 onMounted(async () => {
   await userStore.devLogIn()
 })
-
-console.log(userStore.currentUser)
 </script>
 
 <template>
