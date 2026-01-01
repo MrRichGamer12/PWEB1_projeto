@@ -18,14 +18,15 @@
       <button @click="submit">Submit</button>
     </div>
     <br />
-    <div><estudoHub/></div>
-    <br />
     <div v-if="currentUser?.atividades?.length > 0">
       <h3>Os teus planos de estudo:</h3>
       <div v-for="atividade in currentUser.atividades" :key="atividade.id">
         <p>
           <strong>{{ atividade.nome }}</strong> - {{ atividade.disciplina }}
-          <button>Começar</button>
+          <RouterLink :to="`/estudo/${atividade.id}`">
+            <button>Começar</button>
+            <!--Nota Para identificar o ${} no vue tem que ser em "`${abc}`" para funcionar-->
+          </RouterLink>
         </p>
         <p>{{ atividade.descricao }}</p>
         <p>Meta:{{ atividade.meta }}h | {{ atividade.inicio }} -> {{ atividade.fim }}</p>
@@ -43,7 +44,6 @@
 
 <script>
 import { useUserStore } from '@/stores/userStore'
-import estudoHub from '@/components/estudoHub.vue';
 import { mapState, mapActions } from 'pinia'
 
 export default {
@@ -59,9 +59,6 @@ export default {
         fim: '',
       },
     }
-  },
-  components: {
-    estudoHub,
   },
   computed: {
     ...mapState(useUserStore, ['currentUser', 'isAuthenticated']),
