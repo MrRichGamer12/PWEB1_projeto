@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>0:00:00 - {{ time }}</span>
+    <span>{{ FormatarTempo(time) }}</span>
   </div>
   <div>
     <div v-if="this.on">
@@ -28,6 +28,7 @@
       }
     },
     methods: {
+      //De forma resumida isto cria um timer que vai contar a cada segundo 1
       Start() {
         this.on = false
         if(this.começo!=""){
@@ -45,6 +46,22 @@
       End() {
         this.Stop()
         this.final = new Date().toLocaleTimeString()
+        if(confirm("Tens a certesa que queres terminar o estudo?")){
+          alert("A cancelar")
+        } else {
+          this.Start()
+        }
+      },
+      FormatarTempo(t){
+        //Aqui fáz os calculos para defenir os segundos minutos e horas
+        let sec = t % 60
+        let min = ((t - sec) / 60) % 60
+        const hor = ((t-sec)-(min*60)) / (60 *60)
+        //aqui vai ser convertido valores de 1 digito para que tenha um 0 à frente
+        if(sec < 10 )sec= '0'+ sec
+        if(min < 10 )min= '0'+ min
+        //Aqui irá returnar os valores corretamente
+        return `${hor}:${min}:${sec}`
       }
     },
   }
