@@ -41,7 +41,7 @@ export const useUserStore = defineStore('user', {
             },
             atividadeRecente: [],
           },
-          Recap: {}
+          Recap: []
         })
 
         return { success: true, user: newUser }
@@ -164,6 +164,38 @@ export const useUserStore = defineStore('user', {
         return true
       } catch (error) {
         console.error('Erro:', error)
+        return false
+      }
+    },
+    //Adicionar registro de estudo
+    async addSeci(Id, Date, Time, Start, Finish){
+      if (!this.currentUser) return false
+      try{
+//Inicialmente eu preseso do index da atividade que vou gruardar a seção de estudo
+//PAra isso primeiro vou dar um find através do Id da pagina
+        const indexA = this.currentUser.atividades.find(o => o.id === Id)
+//depos é so dar um IndexOf atividades para as identificar qual é o seu index
+        const indexB = this.currentUser.atividades.indexOf(indexA)
+
+//Aqui vai estar o que vai ser colocado em cada string,
+//O rHist vais para a arey Recap e a nSec para o hstórico da atividade
+        const rHist = {Id, Time, Date}
+        const nSec = [Time, Date, Start, Finish]
+
+//Aqui é adicionado o novo registro em cada uma das partes
+        const historico = [...(this.currentUser.Recap || []), rHist]
+        const addHist = [...(this.currentUser.atividades[indexB].historico || []), nSec]
+
+//Esta parte a a assimilação com a base de dados onde centraliso tudo e dou put para atualizar os dados.
+        indexA.historico= addHist
+        this.currentUser.atividades[indexB] = indexA
+        this.currentUser.Recap = historico
+        await put(`/users/${this.currentUser.id}`, {
+          ...this.currentUser,
+        })
+        return true
+      }catch(err){
+        console.log(err)
         return false
       }
     },

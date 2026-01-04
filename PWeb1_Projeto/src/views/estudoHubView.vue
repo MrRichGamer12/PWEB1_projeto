@@ -17,22 +17,30 @@
 </template>
 
 <script>
+  import { useUserStore } from '@/stores/userStore'
+  import { mapActions } from 'pinia'
   export default {
     data() {
       return {
         on: true,
         time:0,
+        data:{},
         começo:"",
         final:"",
         intervalo: null
       }
     },
     methods: {
+    ...mapActions(useUserStore, ['addSeci']),
       //De forma resumida isto cria um timer que vai contar a cada segundo 1
       Start() {
         this.on = false
-        if(this.começo!=""){
+        if(this.começo == ""){
           this.começo = new Date().toLocaleTimeString()
+          const Y = new Date().getFullYear()
+          const M = new Date().getMonth()
+          const D = new Date().getDate()
+          this.data = {Y, M, D}
         }
         this.intervalo = setInterval(() => {
           this.time += 1
@@ -43,11 +51,15 @@
         this.on = true
         clearInterval(this.intervalo)//parar o timer de contar
       },
-      End() {
+      async End() {
         this.Stop()
         this.final = new Date().toLocaleTimeString()
         if(confirm("Tens a certesa que queres terminar o estudo?")){
-          alert("A cancelar")
+          const success = await this.addSeci(this.$route.params.id, this.data, this.time, this.começo, this.final)
+          if (success) {
+            this.time = 0
+            this.data = {}
+          } else alert('Tem algo errado')
         } else {
           this.Start()
         }

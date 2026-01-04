@@ -1,20 +1,41 @@
 {
   "users": [
     {
-      "id": "0",
+      "id": "0fgra3553vghjur123",
       "username": "neor",
       "password": "H3y_:)ç",
       "cargo": 1,
       "atividades": [
         {
-          "id": 1,
+          "id": "b117-780095fb434a-f9d86483-e32f-4f43",
           "nome": "trabalho WebP1",
           "disciplina": "WebP1",
           "descrição": "Sabes muito bem o que faser",
           "meta": 21,
           "inicio": "2-12-2025",
           "fim": "10-1-2025",
-          "historico": []
+          "historico": [
+            [
+              30,
+              {
+                "Y": 2026,
+                "M": 0,
+                "D": 4
+              },
+              "6:01:52 PM",
+              "6:02:23 PM"
+            ],
+            [
+              5,
+              {
+                "Y": 2026,
+                "M": 0,
+                "D": 4
+              },
+              "6:08:24 PM",
+              "6:08:30 PM"
+            ]
+          ]
         },
         {
           "id": "f9d86483-e32f-4f43-b117-780095fb434a",
@@ -41,7 +62,26 @@
           "xpTotal": 0
         }
       },
-      "Recap": {}
+      "Recap": [
+        {
+          "Id": "b117-780095fb434a-f9d86483-e32f-4f43",
+          "Time": 30,
+          "Date": {
+            "Y": 2026,
+            "M": 0,
+            "D": 4
+          }
+        },
+        {
+          "Id": "b117-780095fb434a-f9d86483-e32f-4f43",
+          "Time": 5,
+          "Date": {
+            "Y": 2026,
+            "M": 0,
+            "D": 4
+          }
+        }
+      ]
     }
   ]
 }

@@ -71,6 +71,8 @@ export default {
       console.log(this.currentUser?.atividades?.length)
     },
     async submit() {
+      //passar de segundos para horas
+      this.novaTarefa.meta *= 3600
       // Chama a função da store para adicionar atividade
       const success = await this.addAct(this.novaTarefa)
       console.log(this.novaTarefa, success)
