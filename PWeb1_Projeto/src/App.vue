@@ -17,10 +17,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="NavBar">
     <navBar/>
-    <div v-if="userStore.currentUser==null"><p>Não tem nenhuma conta ativa? <button @click="mostrar=true">LogIn</button></p></div>
-    <div v-else><p>:)</p><!--Aqui vai ficar o hiperlink para o perfil--></div>
+    <br>
+    <div class="User_InNav">
+      <div v-if="userStore.currentUser==null"><p>Não tem nenhuma conta ativa? <button @click="mostrar=true">LogIn</button></p></div>
+      <div v-else><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
+    </div>
   </div>
   <RouterView/>
   <LogSigIn v-model:mostrar="mostrar" />
@@ -29,5 +32,12 @@ onMounted(async () => {
 <style>
 body{
   background-color: aliceblue;
+}
+.NavBar{
+  min-width: 12%;
+  width: 12%;
+  height: 100%;
+  border: solid;
+  border-color: black;
 }
 </style>
