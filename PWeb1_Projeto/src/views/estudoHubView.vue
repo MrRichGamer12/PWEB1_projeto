@@ -31,7 +31,7 @@
       }
     },
     methods: {
-    ...mapActions(useUserStore, ['addSeci']),
+    ...mapActions(useUserStore, ['addSeci', 'addXP']),
       //De forma resumida isto cria um timer que vai contar a cada segundo 1
       Start() {
         this.on = false
@@ -56,10 +56,12 @@
         this.final = new Date().toLocaleTimeString()
         if(confirm("Tens a certesa que queres terminar o estudo?")){
           const success = await this.addSeci(this.$route.params.id, this.data, this.time, this.começo, this.final)
-          if (success) {
+          const adictXP = await this.addXP(this.time)
+          if (success && adictXP) {
             this.time = 0
             this.data = {}
           } else alert('Tem algo errado')
+
         } else {
           this.Start()
         }
