@@ -1,6 +1,5 @@
 <template>
-  <p>{{ mostrar }}</p>
-  <div v-if="mostrar">
+  <div v-if="mostrar" class="logSigIn">
     <div v-if="this.Select">
       <p>UserName:<input type="text" v-model="TxtLogIn.nome"></p>
       <br>

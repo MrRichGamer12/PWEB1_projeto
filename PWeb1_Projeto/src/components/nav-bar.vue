@@ -2,8 +2,6 @@
     <nav>
         <RouterLink to="/">Home</RouterLink>
         <br>
-        <RouterLink to="/register">RegisterPageView</RouterLink>
-        <br>
         <RouterLink to="/estudo">Estudo</RouterLink>
         <br>
         <RouterLink to="/streac">Streac</RouterLink>
@@ -14,7 +12,7 @@
 
 <script>
     export default {
-        
+
     }
 </script>
 

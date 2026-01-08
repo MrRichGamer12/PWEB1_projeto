@@ -17,7 +17,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="distroTela">
     <div class="NavBar">
       <navBar/>
       <br>
@@ -41,5 +41,9 @@ body{
   height: 100%;
   border: solid;
   border-color: black;
+}
+.distroTela{
+  display: flex;
+  align-items: center;
 }
 </style>
