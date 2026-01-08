@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePageView from '@/views/HomePageView.vue'
 import ProfilePageView from '@/views/ProfilePageView.vue'
-import streacPageView from '@/views/streacPageView.vue'
 import estudoPageView from '@/views/estudoPageView.vue'
 import estudoHubView from '@/views/estudoHubView.vue'
 import Error404View from '@/views/404ErrorView.vue'
@@ -23,7 +22,6 @@ const router = createRouter({
       }
     },
   },
-  { path: '/streac', component: streacPageView },
   { path: '/estudo', component: estudoPageView },
   { path: '/estudo/:id', component: estudoHubView },
   { path: '/aboutus', component: () => import('../views/aboutUs.vue') },
