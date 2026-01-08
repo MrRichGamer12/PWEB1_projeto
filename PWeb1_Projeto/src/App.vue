@@ -18,11 +18,10 @@ onMounted(async () => {
 
 <template>
   <div class="distroTela">
-    <div class="NavBar">
+    <div class="NaviBar">
       <navBar/>
-      <br>
       <div class="User_InNav">
-        <div v-if="userStore.currentUser==null"><p>Não tem nenhuma conta ativa? <button @click="mostrar=true">LogIn</button></p></div>
+        <div v-if="userStore.currentUser==null"><button @click="mostrar=true">Log/SigIn</button></div>
         <div v-else><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
       </div>
     </div>
@@ -33,17 +32,53 @@ onMounted(async () => {
 
 <style>
 body{
+  margin: 0%;
   background-color: aliceblue;
+  font-family: 'Verdana', cursive;
 }
-.NavBar{
-  min-width: 12%;
-  width: 12%;
-  height: 100%;
-  border: solid;
-  border-color: black;
+.NaviBar{
+  display: flex;
+  padding: 5px;
+  padding-left: 1%;
+  padding-right: 2%;
+  flex-direction: row;
+  justify-content:  space-between;
+  background-color: #333;
 }
 .distroTela{
   display: flex;
+  flex-direction: column;
+}
+.User_InNav {
+  display: flex;
   align-items: center;
+  gap: 15px;
+}
+.User_InNav button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.User_InNav button:hover {
+  background-color: #45a049;
+}
+.User_InNav a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: color 0.3s ease;
+}
+.User_InNav a:hover {
+  color: #FFA500;
+  background-color: rgba(255, 215, 0, 0.1);
 }
 </style>
