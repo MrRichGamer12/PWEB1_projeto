@@ -174,13 +174,14 @@ export const useUserStore = defineStore('user', {
 //fazer algo como um cilo que a base é 100 e por cada nivel que é adiconado adicionar 2 apra cada nivél
       if (!this.currentUser) return false
       try{
-        let xp = Time / 100
+        let xp = Time / 1000
         let lv = 1
         this.currentUser.perfil.xp += xp
         xp = this.currentUser.perfil.xp
         for(let i = 1; 98+(i*2) < xp ; i++){
           xp = xp - (98+(i*2))
           this.currentUser.perfil.xpProximoNivel = (98+(i*2)) - xp
+          lv += 1
         }
         this.currentUser.perfil.nivel = lv
         await put(`/users/${this.currentUser.id}`, {

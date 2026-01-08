@@ -17,15 +17,17 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="NavBar">
-    <navBar/>
-    <br>
-    <div class="User_InNav">
-      <div v-if="userStore.currentUser==null"><p>Não tem nenhuma conta ativa? <button @click="mostrar=true">LogIn</button></p></div>
-      <div v-else><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
+  <div>
+    <div class="NavBar">
+      <navBar/>
+      <br>
+      <div class="User_InNav">
+        <div v-if="userStore.currentUser==null"><p>Não tem nenhuma conta ativa? <button @click="mostrar=true">LogIn</button></p></div>
+        <div v-else><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
+      </div>
     </div>
+    <RouterView/>
   </div>
-  <RouterView/>
   <LogSigIn v-model:mostrar="mostrar" />
 </template>
 
