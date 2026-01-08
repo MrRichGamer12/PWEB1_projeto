@@ -27,7 +27,7 @@ onMounted(async () => {
     </div>
     <RouterView/>
   </div>
-  <LogSigIn v-model:mostrar="mostrar" />
+  <LogSigIn v-model:mostrar="mostrar" class="Logs"/>
 </template>
 
 <style>
@@ -35,6 +35,11 @@ body{
   margin: 0%;
   background-color: aliceblue;
   font-family: 'Verdana', cursive;
+}
+.Logs{
+  position: fixed;
+  bottom: 30%;
+  right: 40%;
 }
 .NaviBar{
   display: flex;
