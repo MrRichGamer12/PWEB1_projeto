@@ -1,19 +1,21 @@
 <template>
   <div v-if="mostrar" class="logSigIn">
+    <button @click="fechar()" class="xButon">X</button>
     <div v-if="this.Select">
-      <p>UserName:<input type="text" v-model="TxtLogIn.nome"></p>
       <br>
-      <p>PassWord:<input type="password" v-model="TxtLogIn.pass"></p>
+      <p>UserName:</p><input type="text" v-model="TxtLogIn.nome">
+      <br>
+      <p>PassWord:</p><input type="password" v-model="TxtLogIn.pass">
       <br>
       <button @click="iniciarlogin()">LogIn</button>
       <p>Não tem conta? click aqui =><button @click="CHSigIn">SigIn</button></p>
     </div>
     <div v-else>
-      <p>UserName:<input type="text" v-model="TxtSigIn.nome"></p>
+      <p>UserName:</p><input type="text" v-model="TxtSigIn.nome">
       <br>
-      <p>PassWord:<input type="password" v-model="TxtSigIn.pass"></p>
+      <p>PassWord:</p><input type="password" v-model="TxtSigIn.pass">
       <br>
-      <p>Confirmar PassWord:<input type="password" v-model="TxtSigIn.paSS"></p>
+      <p>Confirmar PassWord:</p><input type="password" v-model="TxtSigIn.paSS">
       <br>
       <button @click="iniciarsigin()">SigIn</button>
       <p>Tem conta? click aqui =><button @click="CHLogin">LogIn</button></p>
@@ -77,6 +79,9 @@
           }else{
             alert("a password não é a mesma")
           }
+        },
+        async fechar() {
+          this.$emit('update:mostrar', false)
         }
       },
     }
@@ -93,5 +98,10 @@
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+.xButon{
+  position: fixed;
+  bottom: 87%;
+  right: 6%;
 }
 </style>
