@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <span>{{ FormatarTempo(time) }}</span>
+  <div class="timer-container">
+    <span class="Timecount">{{ FormatarTempo(time) }}</span>
   </div>
-  <div>
+  <div class="buttons-container">
     <div v-if="this.on">
-      <button @click="this.Start()">Start</button>
+      <button class="btn-start" @click="this.Start()">Start</button>
     </div>
     <div v-else>
-      <button @click="this.Stop()">Stop</button>
+      <button class="btn-stop" @click="this.Stop()">Stop</button>
     </div>
-    <div v-if="this.time != 0">
-      <button @click="this.End()">End</button>
-    </div>
+    <button class="btn-end" @click="this.End()" :disabled="this.time < 1">End</button>
   </div>
 
 </template>
@@ -82,5 +80,47 @@
 </script>
 
 <style scoped>
-
+.timer-container {
+  text-align: center;
+}
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.btn-start {
+  background-color: #6bcee4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-stop {
+  background-color: #c50303;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-end {
+  background-color: #072a46;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-end:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+.Timecount{
+  font-size: 800%;
+}
 </style>
