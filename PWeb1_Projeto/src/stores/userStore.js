@@ -3,7 +3,10 @@ import { get, post, put } from '@/api/api'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
+    //variavel para identificar utilizador
     currentUser: null,
+    //variavel para abrir e fechar a páfina de login
+    showLoginModal: false,
   }),
 
   getters: {
@@ -231,6 +234,10 @@ export const useUserStore = defineStore('user', {
       const username = 'neor'
       const password = 'H3y_:)ç'
       return await this.logIn(username, password)
+    },
+//aqui é onde faz com que o logIn seja modado de true para false e vice versa
+    setShowLoginModal(value) {
+      this.showLoginModal = value
     },
   },
 })

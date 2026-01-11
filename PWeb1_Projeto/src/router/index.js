@@ -14,10 +14,11 @@ const router = createRouter({
       const userStore = useUserStore()
 
       if (!userStore.isAuthenticated) {
-        console.log(userStore.$state.currentUser)
-        next('/:catchAll(.*)*')
+//alteração da vareavel do login para que ele seja aberto ande re redirecionar para a home, porque não dá que eu saiba fazer ao contrário
+        userStore.setShowLoginModal(true)
+//O next false nega a entrada para o suposto link que queres entrar
+        next(false)
       } else {
-        console.log(userStore.$state.currentUser)
         next()
       }
     },

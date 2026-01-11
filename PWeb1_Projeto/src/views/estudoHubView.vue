@@ -25,8 +25,13 @@
         data:{},
         começo:"",
         final:"",
-        intervalo: null
+        intervalo: null,
+        atividade: null
       }
+    },
+    mounted() {
+      const store = useUserStore()
+      this.atividade = store.currentUser.atividades.find(a => a.id === this.$route.params.id)
     },
     methods: {
     ...mapActions(useUserStore, ['addSeci', 'addXP']),

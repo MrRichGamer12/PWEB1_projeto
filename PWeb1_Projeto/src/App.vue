@@ -5,15 +5,19 @@
 import { RouterView, RouterLink } from 'vue-router';
 import navBar from './components/nav-bar.vue'
 import LogSigIn from './components/LogSigIn.vue';
-import { onMounted, ref } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 
 const userStore = useUserStore()
-const mostrar= ref(false)
-
+//Sincronisação do store com o próprio app.vue para alterar o login aqui e na store
+const mostrar = computed({
+  get: () => userStore.showLoginModal,
+  set: (val) => userStore.setShowLoginModal(val)
+})
+/*
 onMounted(async () => {
   await userStore.devLogIn()
-})
+})*/
 </script>
 
 <template>
