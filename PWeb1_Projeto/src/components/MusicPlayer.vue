@@ -128,6 +128,7 @@ const nextTrack = () => {
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  width: 97.9%;
   padding: 10px 14px;
   border-radius: 8px;
   background: #1e1e1e;

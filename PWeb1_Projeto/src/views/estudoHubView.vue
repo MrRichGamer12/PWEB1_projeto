@@ -42,8 +42,9 @@
       {{ this.atividade.fim }}
     </div>
   </div>
-
+  <div class="positPlayer">
     <MusicPlayer/>
+  </div>
 </template>
 
 <script>
@@ -176,5 +177,10 @@ import MusicPlayer from '@/components/MusicPlayer.vue'
 }
 .morInfo{
   margin-left: 10px;
+}
+.positPlayer{
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
 </style>
