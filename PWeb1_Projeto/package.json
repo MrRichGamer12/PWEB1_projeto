@@ -14,7 +14,6 @@
     "lint": "eslint . --fix --cache",
     "format": "prettier --write src/",
     "server": "json-server --watch bd.json --port 3000"
-
   },
   "dependencies": {
     "pinia": "^3.0.3",
@@ -32,6 +31,7 @@
     "globals": "^16.4.0",
     "jsdom": "^27.0.1",
     "prettier": "3.6.2",
+    "sass-embedded": "^1.97.2",
     "vite": "^7.1.11",
     "vite-plugin-vue-devtools": "^8.0.3",
     "vitest": "^3.2.4"
