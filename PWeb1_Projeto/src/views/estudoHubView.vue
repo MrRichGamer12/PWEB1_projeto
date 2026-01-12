@@ -1,15 +1,46 @@
 <template>
-  <div class="timer-container">
-    <span class="Timecount">{{ FormatarTempo(time) }}</span>
+  <h1 class="title">
+    {{ this.atividade.nome }}
+  </h1>
+  <h3 class="discip">
+    Disciplina -
+    {{ this.atividade.disciplina }}
+  </h3>
+  <div>
+    <div class="timer-container">
+      <span class="Timecount">{{ FormatarTempo(time) }}</span>
+    </div>
+    <div class="buttons-container">
+      <div v-if="this.on">
+        <button class="btn-start" @click="this.Start()">Start</button>
+      </div>
+      <div v-else>
+        <button class="btn-stop" @click="this.Stop()">Stop</button>
+      </div>
+      <button class="btn-end" @click="this.End()" :disabled="this.time < 1">End</button>
+    </div>
   </div>
-  <div class="buttons-container">
-    <div v-if="this.on">
-      <button class="btn-start" @click="this.Start()">Start</button>
+  <div class="morInfo">
+    <br>
+    <div>
+      horas=
+      {{ this.atividade.meta }}
     </div>
-    <div v-else>
-      <button class="btn-stop" @click="this.Stop()">Stop</button>
+    <br>
+    <div>
+      Descrição:
+      {{ this.atividade.descricao }}
     </div>
-    <button class="btn-end" @click="this.End()" :disabled="this.time < 1">End</button>
+    <br>
+    <div>
+      De ->
+      {{ this.atividade.inicio }}
+    </div>
+    <br>
+    <div>
+      Até ->
+      {{ this.atividade.fim }}
+    </div>
   </div>
 
 </template>
@@ -29,9 +60,11 @@
         atividade: null
       }
     },
-    mounted() {
+    beforeMount() {
       const store = useUserStore()
       this.atividade = store.currentUser.atividades.find(a => a.id === this.$route.params.id)
+      this.atividade.meta /= 3600
+      this.atividade.meta = Number((this.atividade.meta).toFixed(1))
     },
     methods: {
     ...mapActions(useUserStore, ['addSeci', 'addXP']),
@@ -127,5 +160,16 @@
 }
 .Timecount{
   font-size: 800%;
+}
+.title{
+  margin-left: 10px;
+  margin-bottom: 0;
+}
+.discip{
+  margin-left: 10px;
+  margin-top: 0;
+}
+.morInfo{
+  margin-left: 10px;
 }
 </style>
