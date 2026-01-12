@@ -14,6 +14,9 @@ export const useUserStore = defineStore('user', {
 
     // 👉 acesso rápido ao perfil
     perfil: (state) => state.currentUser?.perfil || null,
+
+    // acesso as atividades
+    acts: (state) => state.currentUser?.atividades || null
   },
 
   actions: {
@@ -57,10 +60,8 @@ export const useUserStore = defineStore('user', {
     async logIn(username, password) {
       try {
         const use = await get(`/users?username=${username}&password=${password}`)
-          console.log('GET /users resposta:', use)
         if (use.length > 0) {
           this.currentUser = use[0]
-          console.log(this.currentUser)
           return true
         }
         return false

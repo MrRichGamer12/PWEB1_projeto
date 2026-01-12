@@ -24,7 +24,27 @@ const router = createRouter({
     },
   },
   { path: '/estudo', component: estudoPageView },
-  { path: '/estudo/:id', component: estudoHubView },
+  { path: '/estudo/:id', component: estudoHubView, beforeEnter: (to, from, next) => {
+//tenta pegar a atividade do link do id
+    try {
+      const userStore = useUserStore()
+      if(!userStore.isAuthenticated){
+        userStore.setShowLoginModal(true)
+        next('/')
+      }
+      const atvd = userStore.acts.find(o => o.id === to.params.id)
+      console.log(atvd)
+      if (atvd === null){
+        next(false)
+      } else {
+        next()
+      }
+    } catch {
+      next('/')
+    }
+
+    },
+  },
   { path: '/aboutus', component: () => import('../views/aboutUs.vue') },
   { path: '/:catchAll(.*)*', component: Error404View}
   ],
