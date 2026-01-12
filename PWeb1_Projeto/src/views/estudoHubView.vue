@@ -43,12 +43,17 @@
     </div>
   </div>
 
+    <MusicPlayer/>
 </template>
 
 <script>
   import { useUserStore } from '@/stores/userStore'
   import { mapActions } from 'pinia'
+import MusicPlayer from '@/components/MusicPlayer.vue'
   export default {
+    components:{
+      MusicPlayer
+    },
     data() {
       return {
         on: true,
