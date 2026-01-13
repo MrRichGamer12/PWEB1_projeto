@@ -2,12 +2,18 @@
   <h1 class="title">
     {{ this.atividade.nome }}
   </h1>
+  <div v-if="this.editMod">
+    <input type="text" v-model="this.atividade.nome">
+  </div>
   <h3 class="discip">
     Disciplina -
     {{ this.atividade.disciplina }}
   </h3>
+  <div v-if="this.editMod">
+    <input type="text" v-model="this.atividade.disciplina">
+  </div>
   <br>
-  <button class="editor-acts">Edit</button>
+  <button class="editor-acts" v-if="!this.editMod" @click="this.stEdit()">Edit</button>
   <div>
     <div class="timer-container">
       <span class="Timecount">{{ FormatarTempo(time) }}</span>
@@ -22,37 +28,53 @@
       <button class="btn-end" @click="this.End()" :disabled="this.time < 1">End</button>
     </div>
   </div>
+  <br>
   <div class="morInfo">
-    <br>
     <div>
       horas=
       {{ this.atividade.meta }}
+    </div>
+    <div v-if="this.editMod">
+      <input type="number" v-model="this.atividade.meta">
     </div>
     <br>
     <div>
       Descrição:
       {{ this.atividade.descricao }}
     </div>
+    <div v-if="this.editMod">
+      <input type="text" v-model="this.atividade.descricao">
+    </div>
     <br>
     <div>
       De ->
       {{ this.atividade.inicio }}
+    </div>
+    <div v-if="this.editMod">
+      <input type="date" v-model="this.atividade.inicio">
     </div>
     <br>
     <div>
       Até ->
       {{ this.atividade.fim }}
     </div>
+    <div v-if="this.editMod">
+      <input type="date" v-model="this.atividade.fim">
+    </div>
   </div>
-  <div class="positPlayer">
+  <div class="positPlayer" v-if="!this.editMod">
     <MusicPlayer/>
+  </div>
+  <div v-else>
+    <button @click="this.endEdit" class="canSub">cancelar</button>
+    <button @click="this.subEdit" class="Submit">comfirm</button>
   </div>
 </template>
 
 <script>
   import { useUserStore } from '@/stores/userStore'
   import { mapActions } from 'pinia'
-import MusicPlayer from '@/components/MusicPlayer.vue'
+  import MusicPlayer from '@/components/MusicPlayer.vue'
   export default {
     components:{
       MusicPlayer
@@ -65,7 +87,9 @@ import MusicPlayer from '@/components/MusicPlayer.vue'
         começo:"",
         final:"",
         intervalo: null,
-        atividade: null
+        atividade: null,
+        nAtividade: null,
+        editMod: false
       }
     },
     beforeMount() {
@@ -73,6 +97,7 @@ import MusicPlayer from '@/components/MusicPlayer.vue'
       this.atividade = store.currentUser.atividades.find(a => a.id === this.$route.params.id)
       this.atividade.meta /= 3600
       this.atividade.meta = Number((this.atividade.meta).toFixed(1))
+      this.nAtividade = this.atividade
     },
     methods: {
     ...mapActions(useUserStore, ['addSeci', 'addXP']),
@@ -120,6 +145,17 @@ import MusicPlayer from '@/components/MusicPlayer.vue'
         if(min < 10 )min= '0'+ min
         //Aqui irá returnar os valores corretamente
         return `${hor}:${min}:${sec}`
+      },
+      stEdit(){
+        this.editMod = true
+      },
+      endEdit(){
+        this.editMod = false;
+        this.nAtividade = this.atividade;
+      },
+      async subEdit(){
+        console.log("o novo será", this.nAtividade)
+        this.endEdit()
       }
     },
   }
@@ -197,4 +233,6 @@ import MusicPlayer from '@/components/MusicPlayer.vue'
   border-radius: 5px;
   cursor: pointer;
 }
+.canSub{}
+.Submit{}
 </style>

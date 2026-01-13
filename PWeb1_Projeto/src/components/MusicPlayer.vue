@@ -24,7 +24,6 @@ const tracks = [
   }
 ]
 
-
 const currentTrackIndex = ref(0)
 const audio = ref(null)
 const isPlaying = ref(false)
@@ -118,10 +117,6 @@ const nextTrack = () => {
     />
   </div>
 </template>
-
-
-
-
 
 <style scoped>
 .player {
