@@ -6,6 +6,8 @@
     Disciplina -
     {{ this.atividade.disciplina }}
   </h3>
+  <br>
+  <button class="editor-acts">Edit</button>
   <div>
     <div class="timer-container">
       <span class="Timecount">{{ FormatarTempo(time) }}</span>
@@ -182,5 +184,17 @@ import MusicPlayer from '@/components/MusicPlayer.vue'
   position: fixed;
   bottom: 0;
   right: 0;
+}
+.editor-acts{
+  position: relative;
+  left: 90%;
+  max-width: 5%;
+  background-color: #6bcee4;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
