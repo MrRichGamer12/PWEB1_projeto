@@ -1,42 +1,28 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
+import axios from 'axios'
 
-const tracks = [
-  {
-    title: 'SoundHelix Song 1',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
-  },
-  {
-    title: 'SoundHelix Song 2',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
-  },
-  {
-    title: 'SoundHelix Song 3',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
-  },
-  {
-    title: 'SoundHelix Song 4',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3'
-  },
-  {
-    title: 'SoundHelix Song 5',
-    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3'
-  }
-]
+// ⚠️ Substitui pela tua própria API key do Freesound
+const FREESOUND_API_KEY = import.meta.env.VITE_FREESOUND_API_KEY
+console.log(import.meta.env.VITE_FREESOUND_API_KEY)
 
+const tracks = ref([])
 const currentTrackIndex = ref(0)
 const audio = ref(null)
 const isPlaying = ref(false)
 const ready = ref(false)
+const loading = ref(false)
 
-const currentTrack = computed(() => tracks[currentTrackIndex.value])
+// track atual
+const currentTrack = computed(() => tracks.value[currentTrackIndex.value] || {})
 
-// 🔎 Log sempre que muda de música
+// 🔎 log sempre que muda de música
 watch(currentTrackIndex, (i) => {
-  console.log('🔁 Mudou de track:', tracks[i].title)
+  console.log('🔁 Mudou de track:', tracks.value[i]?.name)
   ready.value = false
 })
 
+// carregar metadados
 const onLoadedMetadata = () => {
   console.log('✅ loadedmetadata')
   console.log('⏱️ duração:', audio.value.duration)
@@ -52,21 +38,11 @@ const onError = () => {
   console.log(audio.value.error)
 }
 
+// funções de reprodução
 const play = async () => {
-  console.log('🟢 clique em PLAY')
-
-  if (!audio.value) {
-    console.warn('⚠️ audio ref é null')
-    return
-  }
-
-  console.log('📦 ready:', ready.value)
-  console.log('📡 networkState:', audio.value.networkState)
-  console.log('📡 readyState:', audio.value.readyState)
-
+  if (!audio.value) return
   try {
     await audio.value.play()
-    console.log('🎶 play() executado')
     isPlaying.value = true
   } catch (e) {
     console.error('🚫 play bloqueado:', e)
@@ -74,7 +50,7 @@ const play = async () => {
 }
 
 const pause = () => {
-  console.log('⏸️ pause')
+  if (!audio.value) return
   audio.value.pause()
   isPlaying.value = false
 }
@@ -84,24 +60,58 @@ const togglePlay = () => {
 }
 
 const nextTrack = () => {
-  console.log('⏭️ next track')
   pause()
   currentTrackIndex.value =
-    (currentTrackIndex.value + 1) % tracks.length
+    (currentTrackIndex.value + 1) % tracks.value.length
 }
+
+// 🔎 buscar tracks do Freesound
+const fetchTracks = async (query = 'nature') => {
+  loading.value = true
+  try {
+    const response = await axios.get('https://freesound.org/apiv2/search/text/', {
+      params: {
+        query,
+        fields: 'id,name,previews,download',
+        token: FREESOUND_API_KEY,
+        page_size: 10
+      }
+    })
+
+    // a API retorna 'results' com info das tracks
+    tracks.value = response.data.results.map(track => ({
+      id: track.id,
+      title: track.name,
+      url: track.previews['preview-hq-mp3'] // usamos preview para tocar diretamente
+      // se quiseres usar download real, precisas de autenticar com token OAuth
+    }))
+
+    currentTrackIndex.value = 0
+  } catch (e) {
+    console.error('Erro ao buscar tracks do Freesound:', e)
+  } finally {
+    loading.value = false
+  }
+}
+
+// carregar tracks ao iniciar
+onMounted(() => {
+  fetchTracks()
+})
 </script>
-
-
 
 <template>
   <div class="player">
-    <p>{{ currentTrack.title }}</p>
+    <p v-if="currentTrack.title">{{ currentTrack.title }}</p>
+    <p v-else>Carregando tracks...</p>
 
-    <button @click="togglePlay">
+    <button @click="togglePlay" :disabled="!currentTrack.url || loading">
       {{ isPlaying ? 'Pause' : 'Play' }}
     </button>
 
-    <button @click="nextTrack">Next</button>
+    <button @click="nextTrack" :disabled="!currentTrack.url || loading">
+      Next
+    </button>
 
     <audio
       ref="audio"
