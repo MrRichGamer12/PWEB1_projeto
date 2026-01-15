@@ -101,24 +101,6 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async addXp(xp) {
-      if (!this.currentUser) return false
-
-      const perfil = { ...this.currentUser.perfil }
-
-      perfil.xp += xp
-      perfil.estatisticas.xpTotal += xp
-      perfil.estatisticas.acoesRealizadas++
-
-      // subir de nível
-      if (perfil.xp >= perfil.xpProximoNivel) {
-        perfil.nivel++
-        perfil.xp -= perfil.xpProximoNivel
-        perfil.xpProximoNivel += 100
-      }
-
-      return await this.updatePerfil(perfil)
-    },
 
     async updateStreak() {
       if (!this.currentUser) return false

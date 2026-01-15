@@ -2,22 +2,14 @@
   <div class="profile-page" v-if="user">
     <!-- Header -->
     <div class="profile-header">
-      <img
-        :src="`/avatars/${user.perfil.avatar}`"
-        alt="Avatar"
-        class="avatar"
-      />
+      <img :src="getAvatarUrl(user.perfil.avatar)" alt="Avatar" class="avatar" />
+
 
       <div class="user-info">
         <h2 v-if="!editing">{{ user.username }}</h2>
 
         <!-- Edit username -->
-        <input
-          v-else
-          v-model="editUsername"
-          type="text"
-          placeholder="Novo username"
-        />
+        <input v-else v-model="editUsername" type="text" placeholder="Novo username" />
 
         <button @click="toggleEdit">
           {{ editing ? 'Cancelar' : 'Editar perfil' }}
@@ -28,12 +20,11 @@
     <!-- Edit avatar -->
     <div class="profile-section" v-if="editing">
       <h3>Avatar</h3>
-      <select v-model="editAvatar">
-        <option value="avatar_default.png">Default</option>
-        <option value="avatar_01.png">Avatar 1</option>
-        <option value="avatar_02.png">Avatar 2</option>
-        <option value="avatar_03.png">Avatar 3</option>
-      </select>
+
+      <div class="avatar-grid">
+        <img v-for="avatar in availableAvatars" :key="avatar" :src="`/images/avatars/${avatar}`" class="avatar-option"
+          :class="{ selected: editAvatar === avatar }" @click="editAvatar = avatar" />
+      </div>
 
       <button @click="saveChanges">Guardar alterações</button>
     </div>
@@ -42,10 +33,7 @@
     <div class="profile-section">
       <h3>Progressão</h3>
       <p>Nível: {{ user.perfil.nivel }}</p>
-      <progress
-        :value="user.perfil.xp"
-        :max="user.perfil.xpProximoNivel"
-      />
+      <progress :value="user.perfil.xp" :max="user.perfil.xpProximoNivel" />
     </div>
 
     <!-- Streak -->
@@ -76,12 +64,13 @@ export default {
       editing: false,
       editUsername: '',
       editAvatar: '',
+      availableAvatars: [],
+
     }
   },
 
   computed: {
     user() {
-      console.log(useUserStore().currentUser)
       return useUserStore().currentUser
     },
   },
@@ -121,11 +110,47 @@ export default {
 
       this.editing = false
     },
+    getAvatarUrl(name) {
+      return `/images/avatars/${name}`
+    }
+
   },
+  mounted() {
+    // lista manual baseada na pasta public
+    this.availableAvatars = [
+      'avatar_1.png',
+      'avatar_2.png',
+      'avatar_3.png',
+      'avatar_4.png',
+      'avatar_5.png',
+      'avatar_6.png',
+      'avatar_7.png',
+      'avatar_8.png',
+    ]
+  },
+
 }
 </script>
 
 <style scoped>
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 64px);
+  gap: 12px;
+}
+
+.avatar-option {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.avatar-option.selected {
+  border-color: #1db954;
+}
+
 .profile-page {
   max-width: 600px;
   margin: auto;
