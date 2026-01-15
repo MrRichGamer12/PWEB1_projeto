@@ -25,7 +25,7 @@ onMounted(async () => {
       <navBar/>
       <div class="User_InNav">
         <div v-if="userStore.currentUser==null"><button @click="mostrar=true">Log/SigIn</button></div>
-        <div v-else><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
+        <div v-else><img :src="`/images/avatars/${userStore.currentUser.perfil.avatar}`"class="profile_Image"/><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
       </div>
     </div>
     <RouterView/>
@@ -61,6 +61,7 @@ body{
   display: flex;
   align-items: center;
   gap: 15px;
+  width: 110px;
 }
 .User_InNav button {
   background-color: #4CAF50;
@@ -88,5 +89,9 @@ body{
 .User_InNav a:hover {
   color: #FFA500;
   background-color: rgba(255, 215, 0, 0.1);
+}
+.profile_Image{
+  max-width: 20%;
+  border-radius:50%
 }
 </style>
