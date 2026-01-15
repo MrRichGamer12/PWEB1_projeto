@@ -230,7 +230,17 @@ export const useUserStore = defineStore('user', {
         return false
       }
     },
+    async editAtv(rAtv) {
+      const index = this.currentUser.atividades.indexOf(rAtv)
+      try{
+        this.currentUser.atividades[index] = rAtv
+        await put(`/users/${this.currentUser.id}`, {
+          ...this.currentUser,
+        })
+        return true
+      }catch(err){console.log(err)}
 
+    },
     async devLogIn() {
       const username = 'neor'
       const password = 'H3y_:)ç'

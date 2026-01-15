@@ -3,14 +3,14 @@
     {{ this.atividade.nome }}
   </h1>
   <div v-if="this.editMod">
-    <input type="text" v-model="this.atividade.nome">
+    <input type="text" v-model="this.nAtividade.nome">
   </div>
   <h3 class="discip">
     Disciplina -
     {{ this.atividade.disciplina }}
   </h3>
   <div v-if="this.editMod">
-    <input type="text" v-model="this.atividade.disciplina">
+    <input type="text" v-model="this.nAtividade.disciplina">
   </div>
   <br>
   <button class="editor-acts" v-if="!this.editMod" @click="this.stEdit()">Edit</button>
@@ -35,15 +35,15 @@
       {{ this.atividade.meta }}
     </div>
     <div v-if="this.editMod">
-      <input type="number" v-model="this.atividade.meta">
+      <input type="number" v-model="this.nAtividade.meta">
     </div>
     <br>
     <div>
       Descrição:
-      {{ this.atividade.descricao }}
+      {{ this.atividade.descrição }}
     </div>
     <div v-if="this.editMod">
-      <input type="text" v-model="this.atividade.descricao">
+      <input type="text" v-model="this.nAtividade.descrição">
     </div>
     <br>
     <div>
@@ -51,7 +51,7 @@
       {{ this.atividade.inicio }}
     </div>
     <div v-if="this.editMod">
-      <input type="date" v-model="this.atividade.inicio">
+      <input type="date" v-model="this.nAtividade.inicio">
     </div>
     <br>
     <div>
@@ -59,13 +59,13 @@
       {{ this.atividade.fim }}
     </div>
     <div v-if="this.editMod">
-      <input type="date" v-model="this.atividade.fim">
+      <input type="date" v-model="this.nAtividade.fim">
     </div>
   </div>
   <div class="positPlayer" v-if="!this.editMod">
     <MusicPlayer/>
   </div>
-  <div v-else>
+  <div class="positButter" v-else>
     <button @click="this.endEdit" class="canSub">cancelar</button>
     <button @click="this.subEdit" class="Submit">comfirm</button>
   </div>
@@ -100,7 +100,7 @@
       this.nAtividade = this.atividade
     },
     methods: {
-    ...mapActions(useUserStore, ['addSeci', 'addXP']),
+    ...mapActions(useUserStore, ['addSeci', 'addXP', 'editAtv']),
       //De forma resumida isto cria um timer que vai contar a cada segundo 1
       Start() {
         this.on = false
@@ -115,6 +115,7 @@
           this.time += 1
         }, 1000)
         // O setInterval funciona da seguinte forma, setInterval(função, tempo em ms) para executar a função de x em x tempo
+        console.log(this.atividade)
       },
       Stop() {
         this.on = true
@@ -154,7 +155,7 @@
         this.nAtividade = this.atividade;
       },
       async subEdit(){
-        console.log("o novo será", this.nAtividade)
+        await this.editAtv(this.nAtividade)
         this.endEdit()
       }
     },
@@ -233,6 +234,31 @@
   border-radius: 5px;
   cursor: pointer;
 }
-.canSub{}
-.Submit{}
+.canSub{
+  background-color: #c50303;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 3%;
+}
+.Submit{
+  background-color: #03c530;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 3%;
+}
+.positButter{
+  display: flex;
+  align-items: baseline;
+  position: absolute;
+  bottom: 2%;
+  right: 5%;
+}
 </style>
