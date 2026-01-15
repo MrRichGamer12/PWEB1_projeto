@@ -232,6 +232,8 @@ export const useUserStore = defineStore('user', {
     },
     async editAtv(rAtv) {
       const index = this.currentUser.atividades.indexOf(rAtv)
+      console.log(rAtv)
+      console.log(this.currentUser)
       try{
         this.currentUser.atividades[index] = rAtv
         await put(`/users/${this.currentUser.id}`, {
@@ -240,6 +242,15 @@ export const useUserStore = defineStore('user', {
         return true
       }catch(err){console.log(err)}
 
+    },
+    async removeAtv(Id) {
+      const indexA = this.currentUser.atividades.find(o => o.id === Id)
+      const index = this.currentUser.atividades.indexOf(indexA)
+      if (index > -1) {
+        console.log(":(")
+      } else {
+        alert()
+      }
     },
     async devLogIn() {
       const username = 'neor'

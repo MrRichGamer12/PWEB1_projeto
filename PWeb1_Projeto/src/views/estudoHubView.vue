@@ -13,7 +13,10 @@
     <input type="text" v-model="this.nAtividade.disciplina">
   </div>
   <br>
-  <button class="editor-acts" v-if="!this.editMod" @click="this.stEdit()">Edit</button>
+  <div class="ext-Acts">
+    <button class="editor-acts" v-if="!this.editMod" @click="this.stEdit()">Edit</button>
+    <button class="Remover-acts" v-if="!this.editMod" @click="this.stEdit()">Delete</button>
+  </div>
   <div>
     <div class="timer-container">
       <span class="Timecount">{{ FormatarTempo(time) }}</span>
@@ -155,7 +158,9 @@
         this.nAtividade = this.atividade;
       },
       async subEdit(){
+        this.nAtividade.meta *=3600
         await this.editAtv(this.nAtividade)
+        this.nAtividade.meta /=3600
         this.endEdit()
       }
     },
@@ -224,8 +229,8 @@
 }
 .editor-acts{
   position: relative;
-  left: 90%;
-  max-width: 5%;
+  left: 88%;
+  width: 5%;
   background-color: #6bcee4;
   color: white;
   border: none;
@@ -260,5 +265,18 @@
   position: absolute;
   bottom: 2%;
   right: 5%;
+}
+.Remover-acts{
+  position: relative;
+  left: 89%;
+  width: 5%;
+  height: 30px;
+  background-color: #f42222;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
