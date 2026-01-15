@@ -228,11 +228,13 @@ export const useUserStore = defineStore('user', {
     async removeAtv(Id) {
       const indexA = this.currentUser.atividades.find(o => o.id === Id)
       const index = this.currentUser.atividades.indexOf(indexA)
+      console.log(index)
       if (index > -1) {
-        console.log(":(")
-      } else {
-        alert()
+        this.currentUser.atividades.splice(index, 1)
       }
+      await put(`/users/${this.currentUser.id}`, {
+        ...this.currentUser,
+      })
     },
     async devLogIn() {
       const username = 'neor'

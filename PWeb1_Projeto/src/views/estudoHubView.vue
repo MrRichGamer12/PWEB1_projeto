@@ -15,7 +15,7 @@
   <br>
   <div class="ext-Acts">
     <button class="editor-acts" v-if="!this.editMod" @click="this.stEdit()">Edit</button>
-    <button class="Remover-acts" v-if="!this.editMod" @click="this.stEdit()">Delete</button>
+    <button class="Remover-acts" v-if="!this.editMod" @click="this.deletAtv()"><RouterLink to="/estudo">Delete</RouterLink></button>
   </div>
   <div>
     <div class="timer-container">
@@ -43,10 +43,10 @@
     <br>
     <div>
       Descrição:
-      {{ this.atividade.descrição }}
+      {{ this.atividade.descricao }}
     </div>
     <div v-if="this.editMod">
-      <input type="text" v-model="this.nAtividade.descrição">
+      <input type="text" v-model="this.nAtividade.descricao">
     </div>
     <br>
     <div>
@@ -103,7 +103,7 @@
       this.nAtividade = this.atividade
     },
     methods: {
-    ...mapActions(useUserStore, ['addSeci', 'addXP', 'editAtv']),
+    ...mapActions(useUserStore, ['addSeci', 'addXP', 'editAtv', 'removeAtv']),
       //De forma resumida isto cria um timer que vai contar a cada segundo 1
       Start() {
         this.on = false
@@ -162,6 +162,9 @@
         await this.editAtv(this.nAtividade)
         this.nAtividade.meta /=3600
         this.endEdit()
+      },
+      async deletAtv(){
+        await this.removeAtv(this.$route.params.id)
       }
     },
   }

@@ -25,7 +25,7 @@ onMounted(async () => {
       <navBar/>
       <div class="User_InNav">
         <div v-if="userStore.currentUser==null"><button @click="mostrar=true">Log/SigIn</button></div>
-        <div v-else><img :src="`/images/avatars/${userStore.currentUser.perfil.avatar}`"class="profile_Image"/><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
+        <div v-else><img :src="`/images/avatars/${userStore.currentUser.perfil.avatar}`" class="profile_Image"/><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
       </div>
     </div>
     <RouterView/>

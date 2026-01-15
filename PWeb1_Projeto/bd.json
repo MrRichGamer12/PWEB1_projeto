@@ -98,19 +98,9 @@
           "nome": "ddd",
           "disciplina": "Documento Do Doente",
           "descricao": "São os 33 ",
-          "meta": 33,
+          "meta": 0,
           "inicio": "2025-03-03",
           "fim": "2026-05-04",
-          "historico": []
-        },
-        {
-          "id": "81e858c2-e82e-440d-9c3c-a8b416c637f3",
-          "nome": "Remove-me",
-          "disciplina": "pkp",
-          "descricao": "Isto só existe para ser removido",
-          "meta": 25200,
-          "inicio": "2026-01-15",
-          "fim": "2026-01-30",
           "historico": []
         }
       ],
