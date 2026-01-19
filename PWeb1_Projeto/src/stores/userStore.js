@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', {
           cargo: 0,
           atividades: [],
           perfil: {
-            avatar: 'avatar_default.png',
+            avatar: 'avatar_1.png',
             nivel: 1,
             xp: 0,
             xpProximoNivel: 100,
