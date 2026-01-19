@@ -18,14 +18,11 @@ const currentTrack = computed(() => tracks.value[currentTrackIndex.value] || {})
 
 // 🔎 log sempre que muda de música
 watch(currentTrackIndex, (i) => {
-  console.log('🔁 Mudou de track:', tracks.value[i]?.name)
   ready.value = false
 })
 
 // carregar metadados
 const onLoadedMetadata = () => {
-  console.log('✅ loadedmetadata')
-  console.log('⏱️ duração:', audio.value.duration)
   ready.value = true
 }
 
