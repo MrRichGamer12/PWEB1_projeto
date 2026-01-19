@@ -232,6 +232,8 @@ export const useUserStore = defineStore('user', {
       if (index > -1) {
         this.currentUser.atividades.splice(index, 1)
       }
+      console.log(this.currentUser.atividades)
+      console.log(this.currentUser)
       await put(`/users/${this.currentUser.id}`, {
         ...this.currentUser,
       })

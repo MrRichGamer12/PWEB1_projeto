@@ -92,7 +92,8 @@
         intervalo: null,
         atividade: null,
         nAtividade: null,
-        editMod: false
+        editMod: false,
+        id: null
       }
     },
     beforeMount() {
@@ -159,14 +160,19 @@
       },
       async subEdit(){
         this.nAtividade.meta *=3600
+        console.log(this.nAtividade.meta, this.nAtividade)
         await this.editAtv(this.nAtividade)
         this.nAtividade.meta /=3600
         this.endEdit()
       },
       async deletAtv(){
-        await this.removeAtv(this.$route.params.id)
+        console.log(this.$route)
+        await this.removeAtv(this.id)
       }
     },
+    created(){
+      this.id = this.$route.params.id
+    }
   }
 </script>
 
