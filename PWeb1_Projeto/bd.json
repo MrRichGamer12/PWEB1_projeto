@@ -11,7 +11,7 @@
           "nome": "trabalho de Grupo WebP1",
           "disciplina": "WebP1",
           "descrição": "Sabes muito bem o que faser...",
-          "meta": 13,
+          "meta": 0,
           "inicio": "2025-12-01",
           "fim": "2026-01-19",
           "historico": [
@@ -98,7 +98,7 @@
           "nome": "ddd",
           "disciplina": "Documento Do Doente",
           "descricao": "São os 33 ...",
-          "meta": 18000,
+          "meta": 36000,
           "inicio": "2025-03-03",
           "fim": "2026-05-04",
           "historico": []

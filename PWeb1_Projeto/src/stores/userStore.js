@@ -248,4 +248,9 @@ export const useUserStore = defineStore('user', {
       this.showLoginModal = value
     },
   },
+  persist: [
+    {
+      pick: ['currentUser']
+    },
+  ],
 })

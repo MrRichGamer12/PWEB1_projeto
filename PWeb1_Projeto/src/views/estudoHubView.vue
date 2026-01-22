@@ -156,7 +156,7 @@
       },
       endEdit(){
         this.editMod = false;
-        this.nAtividade = this.atividade;
+        this.atividade = this.nAtividade;
       },
       async subEdit(){
         this.nAtividade.meta *=3600

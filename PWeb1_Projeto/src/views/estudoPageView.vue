@@ -102,5 +102,8 @@ export default {
     border: 2px solid black;
     border-radius: 5px;
     margin: 1%;
+    max-width: 50%;
+    padding: 5px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   }
 </style>

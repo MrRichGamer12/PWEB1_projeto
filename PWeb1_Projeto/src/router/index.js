@@ -31,6 +31,7 @@ const router = createRouter({
       if(!userStore.isAuthenticated){
         userStore.setShowLoginModal(true)
         next('/')
+        return
       }
       const atvd = userStore.acts.find(o => o.id === to.params.id)
       console.log(atvd)
