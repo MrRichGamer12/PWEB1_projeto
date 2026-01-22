@@ -11,7 +11,7 @@
           "nome": "trabalho de Grupo WebP1",
           "disciplina": "WebP1",
           "descrição": "Sabes muito bem o que faser...",
-          "meta": 0,
+          "meta": 18000,
           "inicio": "2025-12-01",
           "fim": "2026-01-19",
           "historico": [
@@ -91,14 +91,15 @@
               "2:15:31 PM",
               "2:15:34 PM"
             ]
-          ]
+          ],
+          "descricao": "dddddd"
         },
         {
           "id": "f9d86483-e32f-4f43-b117-780095fb434a",
           "nome": "ddd",
           "disciplina": "Documento Do Doente",
-          "descricao": "São os 33 ...",
-          "meta": 36000,
+          "descricao": "São os 33 ... :=",
+          "meta": 18000,
           "inicio": "2025-03-03",
           "fim": "2026-05-04",
           "historico": []

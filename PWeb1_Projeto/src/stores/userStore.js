@@ -213,16 +213,26 @@ export const useUserStore = defineStore('user', {
       }
     },
     async editAtv(rAtv) {
-      const index = this.currentUser.atividades.indexOf(rAtv)
-      console.log(rAtv)
-      console.log(this.currentUser)
       try{
-        this.currentUser.atividades[index] = rAtv
-        await put(`/users/${this.currentUser.id}`, {
+        const index = this.currentUser.atividades.findIndex(o => o.id === rAtv.id)
+        if(index === -1){
+          console.log("atividade não encontrada")
+          return false
+        }
+        const atividadeUpdate = [
+          ...this.currentUser.atividades
+        ]
+        atividadeUpdate[index] = rAtv
+        const updateComplete = await put(`/users/${this.currentUser.id}`, {
           ...this.currentUser,
+          atividades: atividadeUpdate
         })
+        this.currentUser = updateComplete
         return true
-      }catch(err){console.log(err)}
+      }catch(err){
+        console.log(err)
+        return false
+      }
 
     },
     async removeAtv(Id) {

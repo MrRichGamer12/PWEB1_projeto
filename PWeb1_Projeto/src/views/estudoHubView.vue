@@ -3,14 +3,14 @@
     {{ this.atividade.nome }}
   </h1>
   <div v-if="this.editMod">
-    <input type="text" v-model="this.nAtividade.nome">
+    <input type="text" v-model="this.nNome">
   </div>
   <h3 class="discip">
     Disciplina -
     {{ this.atividade.disciplina }}
   </h3>
   <div v-if="this.editMod">
-    <input type="text" v-model="this.nAtividade.disciplina">
+    <input type="text" v-model="this.nDisciplina">
   </div>
   <br>
   <div class="ext-Acts">
@@ -35,10 +35,10 @@
   <div class="morInfo">
     <div>
       horas=
-      {{ this.atividade.meta }}
+      {{ this.meta }}
     </div>
     <div v-if="this.editMod">
-      <input type="number" v-model="this.nAtividade.meta">
+      <input type="number" v-model="this.nMeta">
     </div>
     <br>
     <div>
@@ -46,7 +46,7 @@
       {{ this.atividade.descricao }}
     </div>
     <div v-if="this.editMod">
-      <input type="text" v-model="this.nAtividade.descricao">
+      <input type="text" v-model="this.nDescricao">
     </div>
     <br>
     <div>
@@ -54,7 +54,7 @@
       {{ this.atividade.inicio }}
     </div>
     <div v-if="this.editMod">
-      <input type="date" v-model="this.nAtividade.inicio">
+      <input type="date" v-model="this.nInicio">
     </div>
     <br>
     <div>
@@ -62,7 +62,7 @@
       {{ this.atividade.fim }}
     </div>
     <div v-if="this.editMod">
-      <input type="date" v-model="this.nAtividade.fim">
+      <input type="date" v-model="this.nFim">
     </div>
   </div>
   <div class="positPlayer" v-if="!this.editMod">
@@ -90,18 +90,36 @@
         começo:"",
         final:"",
         intervalo: null,
-        atividade: null,
-        nAtividade: null,
         editMod: false,
-        id: null
+        atividadeId: null,
+        //edição
+        nNome: null,
+        nDisciplina: null,
+        nMeta: null,
+        nInicio: null,
+        nFim: null,
+        nDescricao: null
       }
     },
-    beforeMount() {
-      const store = useUserStore()
-      this.atividade = store.currentUser.atividades.find(a => a.id === this.$route.params.id)
-      this.atividade.meta /= 3600
-      this.atividade.meta = Number((this.atividade.meta).toFixed(1))
-      this.nAtividade = this.atividade
+    computed: {
+      atividade() {
+        const store = useUserStore()
+        return store.currentUser?.atividades?.find(a => a.id ===  this.atividadeId) || null
+      },
+      meta() {
+        return this.atividade.meta / 3600
+      }
+    },
+    created() {
+      this.atividadeId = this.$route.params.id
+      if(this.atividade){
+        this.nNome = this.atividade.nome
+        this.nDisciplina = this.atividade.disciplina
+        this.nDescricao = this.atividade.descricao
+        this.nMeta = Number((this.atividade.meta / 3600).toFixed(2))
+        this.nInicio = this.atividade.inicio
+        this.nFim = this.atividade.fim
+      }
     },
     methods: {
     ...mapActions(useUserStore, ['addSeci', 'addXP', 'editAtv', 'removeAtv']),
@@ -129,11 +147,12 @@
         this.Stop()
         this.final = new Date().toLocaleTimeString()
         if(confirm("Tens a certesa que queres terminar o estudo?")){
-          const success = await this.addSeci(this.$route.params.id, this.data, this.time, this.começo, this.final)
+          const success = await this.addSeci(this.atividadeId, this.data, this.time, this.começo, this.final)
           const adictXP = await this.addXP(this.time)
           if (success && adictXP) {
             this.time = 0
             this.data = {}
+            this.começo = ""
           } else alert('Tem algo errado')
 
         } else {
@@ -156,22 +175,24 @@
       },
       endEdit(){
         this.editMod = false;
-        this.atividade = this.nAtividade;
       },
       async subEdit(){
-        this.nAtividade.meta *=3600
-        console.log(this.nAtividade.meta, this.nAtividade)
-        await this.editAtv(this.nAtividade)
-        this.nAtividade.meta /=3600
-        this.endEdit()
+        const nAtividade = {
+          ...this.atividade,
+          nome: this.nNome,
+          disciplina: this.nDisciplina,
+          meta: this.nMeta * 3600,
+          inicio: this.nInicio,
+          fim: this.nFim,
+          descricao: this.nDescricao
+        }
+        const result = await this.editAtv(nAtividade)
+        if (result) {this.endEdit()} else {alert('erro na submição')}
       },
       async deletAtv(){
         console.log(this.$route)
-        await this.removeAtv(this.id)
+        await this.removeAtv(this.atividadeId)
       }
-    },
-    created(){
-      this.id = this.$route.params.id
     }
   }
 </script>
