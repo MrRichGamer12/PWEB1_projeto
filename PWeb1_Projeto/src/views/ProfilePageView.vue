@@ -133,47 +133,138 @@ export default {
 </script>
 
 <style scoped>
+/* PÁGINA */
+.profile-page {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  color: #000;
+}
+
+/* CARD BASE (igual à Home) */
+.profile-header,
+.profile-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.4rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* HEADER ocupa linha inteira */
+.profile-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* AVATAR */
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid #1db954;
+  object-fit: cover;
+}
+
+/* USER INFO */
+.user-info h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.user-info input {
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.user-info button {
+  margin-top: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  background: #1db954;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.user-info button:hover {
+  background: #17a44b;
+}
+
+/* TÍTULOS DOS CARDS */
+.profile-section h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.1rem;
+  color: #1db954;
+}
+
+/* GRID DE AVATARES */
 .avatar-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 64px);
+  grid-template-columns: repeat(auto-fill, 56px);
   gap: 12px;
 }
 
 .avatar-option {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.avatar-option:hover {
+  transform: scale(1.1);
 }
 
 .avatar-option.selected {
   border-color: #1db954;
 }
 
-.profile-page {
-  max-width: 600px;
-  margin: auto;
-  padding: 1rem;
+/* PROGRESS */
+progress {
+  width: 100%;
+  height: 14px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.profile-header {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
+progress::-webkit-progress-bar {
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, #1db954, #3cff87);
 }
 
-.user-info button {
-  margin-top: 0.5rem;
+/* TEXTO */
+.profile-section p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
 }
 
-.profile-section {
-  margin-top: 1.5rem;
+/* BOTÃO GUARDAR */
+.profile-section button {
+  margin-top: 0.8rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  border: none;
+  background: #1db954;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
 }
+
+.profile-section button:hover {
+  background: #17a44b;
+}
+
 </style>

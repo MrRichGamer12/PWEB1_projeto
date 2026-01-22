@@ -64,7 +64,6 @@
         async iniciarlogin() {
           const lig = await this.logIn(this.TxtLogIn.nome, this.TxtLogIn.pass)
           if (lig) {
-            alert("por enquantoassim")
             this.$emit('update:mostrar', false)
             console.log(this.mostrar)
           } else alert('Tem algo errado')
@@ -73,7 +72,6 @@
           if(this.TxtSigIn.pass == this.TxtSigIn.paSS){
             const siginar = await this.register(this.TxtSigIn.nome, this.TxtSigIn.pass)
             if(siginar){
-              alert("Utilisador Criado")
               this.$emit('update:mostrar', false)
             } else alert("Algo de érrado aconteceu")
           }else{
