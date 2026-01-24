@@ -20,17 +20,19 @@
     <br />
     <div v-if="currentUser?.atividades?.length > 0">
       <h3>Os teus planos de estudo:</h3>
-      <div v-for="atividade in currentUser.atividades" :key="atividade.id">
-        <div class="Card">
-          <p>
-            <strong>{{ atividade.nome }}</strong> - {{ atividade.disciplina }}
-            <RouterLink :to="`/estudo/${atividade.id}`">
-              <button>Começar</button>
-              <!--Nota Para identificar o ${} no vue tem que ser em "`${abc}`" para funcionar-->
-            </RouterLink>
-          </p>
-          <p>{{ atividade.descricao }}</p>
-          <p>Meta:{{ atividade.meta }}h | {{ atividade.inicio }} -> {{ atividade.fim }}</p>
+      <div class="box_cards">
+        <div v-for="atividade in currentUser.atividades" :key="atividade.id">
+          <div class="Card">
+            <strong>{{ atividade.nome }}</strong>
+            <p>{{ atividade.disciplina }}</p>
+            <RouterLink :to="`/estudo/${atividade.id}`"><button class="card-button">Começar</button></RouterLink>
+            <!--Nota Para identificar o ${} no vue tem que ser em "`${abc}`" para funcionar-->
+            <br>
+            <p>{{ atividade.descricao }}</p>
+            <p>Meta:{{ this.realMeta(atividade.meta) }}h</p>
+            <p>De: {{ atividade.inicio }}</p>
+            <p>Até: {{ atividade.fim }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -93,17 +95,33 @@ export default {
         fim: '',
       }
     },
+    realMeta(i) {
+      console.log(i)
+      return i / 3600
+    },
   },
 }
 </script>
 
 <style scoped>
+  .box_cards{
+    margin-top: 20px;
+    display: flex;
+  }
   .Card{
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: 1%;
-    max-width: 50%;
-    padding: 5px;
+    min-width: 300px;
+    border: 3px solid black;
+    border-radius: 2%;
+    margin-left: 30px;
+    margin-right: 10px;
+    padding: 2%;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+  .card-button{
+    background-color: #b8fffa;
+    border: none;
+    padding: 1% 2%;
+    font-size: 16px;
+    border-radius: 5px;
   }
 </style>
