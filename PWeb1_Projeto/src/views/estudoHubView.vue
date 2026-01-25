@@ -1,7 +1,8 @@
 <template>
-  <h1 class="title">
-    {{ this.atividade.nome }}
-  </h1>
+  <div class="estudo-hub-container">
+    <h1 class="title">
+      {{ this.atividade.nome }}
+    </h1>
   <div v-if="this.editMod">
     <input type="text" v-model="this.nNome">
   </div>
@@ -71,6 +72,7 @@
   <div class="positButter" v-else>
     <button @click="this.endEdit" class="canSub">cancelar</button>
     <button @click="this.subEdit" class="Submit">comfirm</button>
+  </div>
   </div>
 </template>
 
@@ -198,6 +200,10 @@
 </script>
 
 <style scoped>
+.estudo-hub-container {
+  padding-bottom: 350px;
+  position: relative;
+}
 .timer-container {
   text-align: center;
 }
@@ -253,9 +259,10 @@
   margin-left: 10px;
 }
 .positPlayer{
-  position: fixed;
-  bottom: 0;
-  right: 0;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 100;
 }
 .editor-acts{
   position: relative;
