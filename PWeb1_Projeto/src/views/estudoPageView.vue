@@ -142,9 +142,7 @@ export default {
     background-color: rgb(53, 49, 49);
     color: aliceblue;
     font-weight: bolder;
-    border: none;
-    width: 2%;
-    height: 4%;
+    border: solid 1px rgb(53, 49,49);
     border-radius: 10%;
   }
   .addAtvButt:hover {

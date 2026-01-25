@@ -14,13 +14,17 @@
 
 <style lang="scss" scoped>
   .NavBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     :deep(a) {
       color: #ffffff;
       text-decoration: none;
       margin: 0 1rem;
 
       &:hover {
-        color: lightblue;
+        color: rgb(230, 221, 173);
       }
     }
   }

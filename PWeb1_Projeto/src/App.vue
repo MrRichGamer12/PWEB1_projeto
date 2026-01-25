@@ -39,7 +39,9 @@ const mostrar = computed({
     </div>
 
     <!-- CONTEÚDO -->
-    <RouterView/>
+    <div class="content">
+      <RouterView/>
+    </div>
 
     <!-- FOOTER -->
     <Footer/>
@@ -73,9 +75,13 @@ body{
   display: flex;
   flex-direction: column;
 }
-.User_InNav {
+.redirect-profile {
   display: flex;
   align-items: center;
+}
+.User_InNav {
+  display: flex;
+  align-items: baseline;
   gap: 15px;
   width: 110px;
 }
@@ -108,7 +114,8 @@ body{
 }
 .profile_Image{
   max-width: 20%;
-  border-radius:50%
+  border-radius:50%;
+  padding: 8px 15px;
 }
 .distroTela {
   display: flex;
@@ -116,7 +123,7 @@ body{
   min-height: 100vh;
 }
 
-RouterView {
+.content {
   flex: 1;
 }
 </style>
