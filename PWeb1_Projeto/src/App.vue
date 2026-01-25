@@ -16,9 +16,6 @@ const mostrar = computed({
   get: () => userStore.showLoginModal,
   set: (val) => userStore.setShowLoginModal(val)
 })
-onMounted(async () => {
-  await userStore.devLogIn()
-})
 </script>
 
 <template>

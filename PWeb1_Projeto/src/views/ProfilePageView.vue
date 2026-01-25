@@ -13,7 +13,7 @@
           <button @click="toggleEdit" class="edit-button">
             {{ editing ? 'Cancelar' : 'Editar' }}
           </button>
-          <button class="Delete-button">Delete</button>
+          <button class="Delete-button" @click="this.deletAccount()">Delete</button>
         </div>
       </div>
     </div>
@@ -56,6 +56,7 @@
 
 <script>
 import { useUserStore } from '@/stores/userStore'
+import { mapState } from 'pinia'
 
 export default {
   name: 'ProfileView',
@@ -74,6 +75,7 @@ export default {
     user() {
       return useUserStore().currentUser
     },
+    ...mapState(useUserStore, ['logOut', 'deleteAccount']),
   },
 
   methods: {
@@ -108,13 +110,20 @@ export default {
           avatar: this.editAvatar,
         })
       }
-
       this.editing = false
     },
     getAvatarUrl(name) {
       return `/images/avatars/${name}`
+    },
+    async logOutAccount() {
+      await this.logOut()
+      this.$router.push('/')
+    },
+    async deletAccount(){
+      await this.deleteAccount()
+      await this.logOut()
+      this.$router.push('/')
     }
-
   },
   mounted() {
     // lista manual baseada na pasta public

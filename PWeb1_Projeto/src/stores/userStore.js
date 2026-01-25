@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { get, post, put } from '@/api/api'
+import { get, post, put, del } from '@/api/api'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -98,6 +98,9 @@ export const useUserStore = defineStore('user', {
       }
     },
 
+    async deleteAccount(){
+      await del(`/users/${this.currentUser.id}`)
+    },
 
     async updateStreak() {
       if (!this.currentUser) return false
