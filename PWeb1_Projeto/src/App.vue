@@ -7,6 +7,8 @@ import navBar from './components/nav-bar.vue'
 import LogSigIn from './components/LogSigIn.vue';
 import { onMounted, computed } from 'vue'
 import { useUserStore } from '@/stores/userStore'
+import Footer from './components/Footer.vue'
+
 
 const userStore = useUserStore()
 //Sincronisação do store com o próprio app.vue para alterar o login aqui e na store
@@ -24,14 +26,31 @@ onMounted(async () => {
     <div class="NaviBar">
       <navBar/>
       <div class="User_InNav">
-        <div v-if="userStore.currentUser==null"><button @click="mostrar=true">Log/SigIn</button></div>
-        <div v-else><img :src="`/images/avatars/${userStore.currentUser.perfil.avatar}`" class="profile_Image"/><RouterLink to="/profile">{{userStore.currentUser.username}}</RouterLink></div>
+        <div v-if="userStore.currentUser==null">
+          <button @click="mostrar=true">Log/SigIn</button>
+        </div>
+        <div v-else>
+          <img
+            :src="`/images/avatars/${userStore.currentUser.perfil.avatar}`"
+            class="profile_Image"
+          />
+          <RouterLink to="/profile">
+            {{ userStore.currentUser.username }}
+          </RouterLink>
+        </div>
       </div>
     </div>
+
+    <!-- CONTEÚDO -->
     <RouterView/>
+
+    <!-- FOOTER -->
+    <Footer/>
   </div>
+
   <LogSigIn v-model:mostrar="mostrar" class="Logs"/>
 </template>
+
 
 <style>
 body{
@@ -93,5 +112,14 @@ body{
 .profile_Image{
   max-width: 20%;
   border-radius:50%
+}
+.distroTela {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+RouterView {
+  flex: 1;
 }
 </style>
