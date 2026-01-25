@@ -37,13 +37,10 @@ export const useUserStore = defineStore('user', {
             nivel: 1,
             xp: 0,
             xpProximoNivel: 100,
+            xpDoNivel: 100,
             streak: {
               atual: 0,
               ultimaAtividade: null,
-            },
-            estatisticas: {
-              acoesRealizadas: 0,
-              xpTotal: 0,
             },
             atividadeRecente: [],
           },
@@ -167,6 +164,7 @@ export const useUserStore = defineStore('user', {
         for(let i = 1; 98+(i*2) < xp ; i++){
           xp = xp - (98+(i*2))
           this.currentUser.perfil.xpProximoNivel = (98+(i*2)) - xp
+          this.currentUser.perfil.xpDoNivel = (98+(i*2))
           lv += 1
         }
         this.currentUser.perfil.nivel = lv

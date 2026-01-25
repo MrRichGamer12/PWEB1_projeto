@@ -4,16 +4,17 @@
     <div class="profile-header">
       <img :src="getAvatarUrl(user.perfil.avatar)" alt="Avatar" class="avatar" />
 
-
       <div class="user-info">
         <h2 v-if="!editing">{{ user.username }}</h2>
 
         <!-- Edit username -->
         <input v-else v-model="editUsername" type="text" placeholder="Novo username" />
-
-        <button @click="toggleEdit">
-          {{ editing ? 'Cancelar' : 'Editar perfil' }}
-        </button>
+        <div class="buttons">
+          <button @click="toggleEdit" class="edit-button">
+            {{ editing ? 'Cancelar' : 'Editar' }}
+          </button>
+          <button class="Delete-button">Delete</button>
+        </div>
       </div>
     </div>
 
@@ -33,7 +34,7 @@
     <div class="profile-section">
       <h3>Progressão</h3>
       <p>Nível: {{ user.perfil.nivel }}</p>
-      <progress :value="user.perfil.xp" :max="user.perfil.xpProximoNivel" />
+      <progress :value="user.perfil.xpProximoNivel" :max="user.perfil.xpDoNivel" />
     </div>
 
     <!-- Streak -->
@@ -45,8 +46,8 @@
     <!-- Estatísticas -->
     <div class="profile-section">
       <h3>Estatísticas</h3>
-      <p>Ações: {{ user.perfil.estatisticas.acoesRealizadas }}</p>
-      <p>XP total: {{ user.perfil.estatisticas.xpTotal }}</p>
+      <p>Ações: {{ user.Recap.length }}</p>
+      <p>XP total: {{ user.perfil.xp }}</p>
     </div>
   </div>
 
@@ -155,6 +156,7 @@ export default {
 
 /* HEADER ocupa linha inteira */
 .profile-header {
+  position: relative;
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
@@ -188,15 +190,11 @@ export default {
   padding: 0.45rem 0.9rem;
   border-radius: 8px;
   border: none;
-  background: #1db954;
   color: #000;
   font-weight: 600;
   cursor: pointer;
 }
 
-.user-info button:hover {
-  background: #17a44b;
-}
 
 /* TÍTULOS DOS CARDS */
 .profile-section h3 {
@@ -265,6 +263,26 @@ progress::-webkit-progress-value {
 
 .profile-section button:hover {
   background: #17a44b;
+}
+.buttons {
+  position: absolute;
+  display: flex;
+  align-items: baseline;
+  right: 5%;
+  top: 10%;
+}
+.edit-button {
+  background: #1db954;
+  margin-right: 10%;
+}
+.edit-button:hover {
+  background: #17a44b;
+}
+.Delete-button {
+  background-color: red;
+}
+.Delete-button:hover {
+  background: #a70101;
 }
 
 </style>

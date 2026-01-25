@@ -90,6 +90,16 @@
               },
               "2:15:31 PM",
               "2:15:34 PM"
+            ],
+            [
+              11,
+              {
+                "Y": 2026,
+                "M": 0,
+                "D": 25
+              },
+              "3:47:48 PM",
+              "3:48:00 PM"
             ]
           ],
           "descricao": "dddddd"
@@ -106,17 +116,14 @@
         }
       ],
       "perfil": {
-        "avatar": "avatar_1.png",
+        "avatar": "avatar_4.png",
         "nivel": 5,
-        "xp": 459.094,
-        "xpProximoNivel": 58.906000000000006,
+        "xp": 459.204,
+        "xpProximoNivel": 58.79599999999999,
+        "xpDoNivel": 106,
         "streak": {
           "atual": 0,
           "ultimaAtividade": null
-        },
-        "estatisticas": {
-          "acoesRealizadas": 0,
-          "xpTotal": 0
         }
       },
       "Recap": [
@@ -186,6 +193,15 @@
             "Y": 2026,
             "M": 0,
             "D": 8
+          }
+        },
+        {
+          "Id": "b117-780095fb434a-f9d86483-e32f-4f43",
+          "Time": 11,
+          "Date": {
+            "Y": 2026,
+            "M": 0,
+            "D": 25
           }
         }
       ]

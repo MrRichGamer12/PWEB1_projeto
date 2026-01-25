@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="addTaref = true">+</button>
+    <button class="addAtvButt" @click="addTaref = true">+</button>
     <br />
     <div v-if="addTaref">
       <button @click="close()">X</button>
@@ -23,15 +23,14 @@
       <div class="box_cards">
         <div v-for="atividade in currentUser.atividades" :key="atividade.id">
           <div class="Card">
-            <strong>{{ atividade.nome }}</strong>
-            <p>{{ atividade.disciplina }}</p>
             <RouterLink :to="`/estudo/${atividade.id}`"><button class="card-button">Começar</button></RouterLink>
+            <strong class="Titulo-card">{{ atividade.nome }}</strong>
+            <p class="disciplina-card">{{ atividade.disciplina }}</p>
             <!--Nota Para identificar o ${} no vue tem que ser em "`${abc}`" para funcionar-->
-            <br>
-            <p>{{ atividade.descricao }}</p>
-            <p>Meta:{{ this.realMeta(atividade.meta) }}h</p>
-            <p>De: {{ atividade.inicio }}</p>
-            <p>Até: {{ atividade.fim }}</p>
+            <p class="Descri-card">{{ atividade.descricao }}</p>
+            <p class="Meta-card">Meta:{{ this.realMeta(atividade.meta) }}h</p>
+            <p class="inicio-card">De: {{ atividade.inicio }}</p>
+            <p class="fim-card">Até: {{ atividade.fim }}</p>
           </div>
         </div>
       </div>
@@ -109,6 +108,7 @@ export default {
     display: flex;
   }
   .Card{
+    position: relative;
     min-width: 300px;
     border: 3px solid black;
     border-radius: 2%;
@@ -118,10 +118,48 @@ export default {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   }
   .card-button{
-    background-color: #b8fffa;
+    position: absolute;
+    top: 7%;
+    right: 6%;
     border: none;
     padding: 1% 2%;
     font-size: 16px;
     border-radius: 5px;
+    font-size: larger;
+  }
+  .card-button button:hover {
+    background-color: rgb(255, 0, 0);
+  }
+  .Titulo-card{
+    position: absolute;
+    width: 65%;
+    font-size: larger;
+  }
+  .addAtvButt{
+    position: absolute;
+    top: 10%;
+    right: 3%;
+    background-color: rgb(53, 49, 49);
+    color: aliceblue;
+    font-weight: bolder;
+    border: none;
+    width: 2%;
+    height: 4%;
+    border-radius: 10%;
+  }
+  .addAtvButt:hover {
+    background-color: aliceblue;
+    border: solid 1px rgb(53, 49,49);
+    color: rgb(53, 49,49);
+  }
+  .disciplina-card {
+  }
+  .Descri-card{
+  }
+  .Meta-card{
+  }
+  .inicio-card{
+  }
+  .fim-card{
   }
 </style>
