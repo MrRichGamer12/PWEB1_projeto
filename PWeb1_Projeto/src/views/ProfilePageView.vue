@@ -13,7 +13,8 @@
           <button @click="toggleEdit" class="edit-button">
             {{ editing ? 'Cancelar' : 'Editar' }}
           </button>
-          <button class="Delete-button" @click="this.deletAccount()">Delete</button>
+          <button v-if="editing" class="Delete-button" @click="this.deletAccount()">Delete</button>
+          <button v-else class="Delete-button" @click="this.logOutAccount()">LogOut</button>
         </div>
       </div>
     </div>
@@ -46,7 +47,7 @@
     <!-- Estatísticas -->
     <div class="profile-section">
       <h3>Estatísticas</h3>
-      <p>Ações: {{ user.Recap.length }}</p>
+      <p>Ações: {{ user.Recap?.length || 0 }}</p>
       <p>XP total: {{ user.perfil.xp }}</p>
     </div>
   </div>

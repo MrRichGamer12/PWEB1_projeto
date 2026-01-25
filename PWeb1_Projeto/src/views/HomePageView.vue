@@ -82,9 +82,9 @@
       <div class="card">
         <h2>📊 Estatísticas</h2>
 
-        <ul v-if="perfil.estatisticas.acoesRealizadas > 0">
-          <li>Ações realizadas: {{ perfil.estatisticas.acoesRealizadas }}</li>
-          <li>XP total: {{ perfil.estatisticas.xpTotal }}</li>
+        <ul v-if="store.currentUser?.Recap?.length > 0">
+          <li>Ações realizadas: {{ store.currentUser?.Recap?.length }}</li>
+          <li>XP total: {{ perfil.xp }}</li>
           <li>Total de atividades: {{ atividades.length }}</li>
         </ul>
 

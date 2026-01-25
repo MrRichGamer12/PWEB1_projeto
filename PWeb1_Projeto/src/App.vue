@@ -26,7 +26,7 @@ const mostrar = computed({
         <div v-if="userStore.currentUser==null">
           <button @click="mostrar=true">Log/SigIn</button>
         </div>
-        <div v-else>
+        <div class="redirect-profile" v-else>
           <img
             :src="`/images/avatars/${userStore.currentUser.perfil.avatar}`"
             class="profile_Image"
