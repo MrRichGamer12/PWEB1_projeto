@@ -98,9 +98,25 @@ export const useUserStore = defineStore('user', {
       }
     },
 
-    async deleteAccount(){
-      await del(`/users/${this.currentUser.id}`)
-    },
+    async deleteAccount() {
+  if (!this.currentUser) return false
+
+  try {
+    const id = this.currentUser.id
+
+    await del(`/users/${id}`)
+
+    // 🔥 LIMPAR ESTADO LOCAL
+    this.currentUser = null
+    this.showLoginModal = false
+
+    return true
+  } catch (error) {
+    console.error(error)
+    return false
+  }
+}
+,
 
     async updateStreak() {
       if (!this.currentUser) return false
