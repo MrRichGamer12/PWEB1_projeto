@@ -4,6 +4,7 @@ import ProfilePageView from '@/views/ProfilePageView.vue'
 import estudoPageView from '@/views/estudoPageView.vue'
 import estudoHubView from '@/views/estudoHubView.vue'
 import Error404View from '@/views/404ErrorView.vue'
+import AdminView from '@/views/AdminView.vue'
 import { useUserStore } from '@/stores/userStore'
 
 const router = createRouter({
@@ -14,9 +15,9 @@ const router = createRouter({
       const userStore = useUserStore()
 
       if (!userStore.isAuthenticated) {
-//alteração da vareavel do login para que ele seja aberto ande re redirecionar para a home, porque não dá que eu saiba fazer ao contrário
+        //alteração da vareavel do login para que ele seja aberto ande re redirecionar para a home, porque não dá que eu saiba fazer ao contrário
         userStore.setShowLoginModal(true)
-//O next false nega a entrada para o suposto link que queres entrar
+        //O next false nega a entrada para o suposto link que queres entrar
         next(false)
       } else {
         next()
@@ -24,30 +25,44 @@ const router = createRouter({
     },
   },
   { path: '/estudo', component: estudoPageView },
-  { path: '/estudo/:id', component: estudoHubView, beforeEnter: (to, from, next) => {
-//tenta pegar a atividade do link do id
-    try {
-      const userStore = useUserStore()
-      if(!userStore.isAuthenticated){
-        userStore.setShowLoginModal(true)
+  {
+    path: '/estudo/:id', component: estudoHubView, beforeEnter: (to, from, next) => {
+      //tenta pegar a atividade do link do id
+      try {
+        const userStore = useUserStore()
+        if (!userStore.isAuthenticated) {
+          userStore.setShowLoginModal(true)
+          next('/')
+          return
+        }
+        const atvd = userStore.acts.find(o => o.id === to.params.id)
+        console.log(atvd)
+        if (atvd === null) {
+          next(false)
+        } else {
+          next()
+        }
+      } catch {
         next('/')
-        return
       }
-      const atvd = userStore.acts.find(o => o.id === to.params.id)
-      console.log(atvd)
-      if (atvd === null){
-        next(false)
-      } else {
-        next()
-      }
-    } catch {
-      next('/')
-    }
 
     },
   },
   { path: '/aboutus', component: () => import('../views/aboutUs.vue') },
-  { path: '/:catchAll(.*)*', component: Error404View}
+  {
+    path: '/admin',
+    component: AdminView,
+    beforeEnter: (to, from, next) => {
+      const userStore = useUserStore()
+
+      if (!userStore.isAuthenticated || !userStore.isAdmin) {
+        next('/')
+      } else {
+        next()
+      }
+    }
+  },
+  { path: '/:catchAll(.*)*', component: Error404View }
   ],
 })
 export default router

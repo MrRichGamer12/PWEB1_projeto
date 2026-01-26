@@ -16,7 +16,10 @@ export const useUserStore = defineStore('user', {
     perfil: (state) => state.currentUser?.perfil || null,
 
     // acesso as atividades
-    acts: (state) => state.currentUser?.atividades || null
+    acts: (state) => state.currentUser?.atividades || null,
+    //acesso de admin
+    isAdmin: (state) => state.currentUser?.cargo === 1,
+
   },
 
   actions: {
@@ -99,24 +102,24 @@ export const useUserStore = defineStore('user', {
     },
 
     async deleteAccount() {
-  if (!this.currentUser) return false
+      if (!this.currentUser) return false
 
-  try {
-    const id = this.currentUser.id
+      try {
+        const id = this.currentUser.id
 
-    await del(`/users/${id}`)
+        await del(`/users/${id}`)
 
-    // 🔥 LIMPAR ESTADO LOCAL
-    this.currentUser = null
-    this.showLoginModal = false
+        // 🔥 LIMPAR ESTADO LOCAL
+        this.currentUser = null
+        this.showLoginModal = false
 
-    return true
-  } catch (error) {
-    console.error(error)
-    return false
-  }
-}
-,
+        return true
+      } catch (error) {
+        console.error(error)
+        return false
+      }
+    }
+    ,
 
     async updateStreak() {
       if (!this.currentUser) return false
@@ -171,19 +174,19 @@ export const useUserStore = defineStore('user', {
     },
 
     //Adicionar XP
-    async addXP(Time){
-//Para resumir o que eu pretendo é ao submeter o tempo e dividilo por 1000 isso será o XP adicionado e pertendo
-//fazer algo como um cilo que a base é 100 e por cada nivel que é adiconado adicionar 2 apra cada nivél
+    async addXP(Time) {
+      //Para resumir o que eu pretendo é ao submeter o tempo e dividilo por 1000 isso será o XP adicionado e pertendo
+      //fazer algo como um cilo que a base é 100 e por cada nivel que é adiconado adicionar 2 apra cada nivél
       if (!this.currentUser) return false
-      try{
+      try {
         let xp = Time / 100
         let lv = 1
         this.currentUser.perfil.xp += xp
         xp = this.currentUser.perfil.xp
-        for(let i = 1; 98+(i*2) < xp ; i++){
-          xp = xp - (98+(i*2))
-          this.currentUser.perfil.xpProximoNivel = (98+(i*2)) - xp
-          this.currentUser.perfil.xpDoNivel = (98+(i*2))
+        for (let i = 1; 98 + (i * 2) < xp; i++) {
+          xp = xp - (98 + (i * 2))
+          this.currentUser.perfil.xpProximoNivel = (98 + (i * 2)) - xp
+          this.currentUser.perfil.xpDoNivel = (98 + (i * 2))
           lv += 1
         }
         this.currentUser.perfil.nivel = lv
@@ -191,48 +194,48 @@ export const useUserStore = defineStore('user', {
           ...this.currentUser,
         })
         return true
-      }catch(err){
+      } catch (err) {
         console.log(err)
         return false
       }
     },
 
     //Adicionar registro de estudo
-    async addSeci(Id, Date, Time, Start, Finish){
+    async addSeci(Id, Date, Time, Start, Finish) {
       if (!this.currentUser) return false
-      try{
-//Inicialmente eu preseso do index da atividade que vou gruardar a seção de estudo
-//PAra isso primeiro vou dar um find através do Id da pagina
+      try {
+        //Inicialmente eu preseso do index da atividade que vou gruardar a seção de estudo
+        //PAra isso primeiro vou dar um find através do Id da pagina
         const indexA = this.currentUser.atividades.find(o => o.id === Id)
-//depos é so dar um IndexOf atividades para as identificar qual é o seu index
+        //depos é so dar um IndexOf atividades para as identificar qual é o seu index
         const indexB = this.currentUser.atividades.indexOf(indexA)
 
-//Aqui vai estar o que vai ser colocado em cada string,
-//O rHist vais para a arey Recap e a nSec para o hstórico da atividade
-        const rHist = {Id, Time, Date}
+        //Aqui vai estar o que vai ser colocado em cada string,
+        //O rHist vais para a arey Recap e a nSec para o hstórico da atividade
+        const rHist = { Id, Time, Date }
         const nSec = [Time, Date, Start, Finish]
 
-//Aqui é adicionado o novo registro em cada uma das partes
+        //Aqui é adicionado o novo registro em cada uma das partes
         const historico = [...(this.currentUser.Recap || []), rHist]
         const addHist = [...(this.currentUser.atividades[indexB].historico || []), nSec]
 
-//Esta parte a a assimilação com a base de dados onde centraliso tudo e dou put para atualizar os dados.
-        indexA.historico= addHist
+        //Esta parte a a assimilação com a base de dados onde centraliso tudo e dou put para atualizar os dados.
+        indexA.historico = addHist
         this.currentUser.atividades[indexB] = indexA
         this.currentUser.Recap = historico
         await put(`/users/${this.currentUser.id}`, {
           ...this.currentUser,
         })
         return true
-      }catch(err){
+      } catch (err) {
         console.log(err)
         return false
       }
     },
     async editAtv(rAtv) {
-      try{
+      try {
         const index = this.currentUser.atividades.findIndex(o => o.id === rAtv.id)
-        if(index === -1){
+        if (index === -1) {
           console.log("atividade não encontrada")
           return false
         }
@@ -246,7 +249,7 @@ export const useUserStore = defineStore('user', {
         })
         this.currentUser = updateComplete
         return true
-      }catch(err){
+      } catch (err) {
         console.log(err)
         return false
       }
@@ -270,7 +273,7 @@ export const useUserStore = defineStore('user', {
       const password = 'H3y_:)ç'
       return await this.logIn(username, password)
     },
-//aqui é onde faz com que o logIn seja modado de true para false e vice versa
+    //aqui é onde faz com que o logIn seja modado de true para false e vice versa
     setShowLoginModal(value) {
       this.showLoginModal = value
     },
